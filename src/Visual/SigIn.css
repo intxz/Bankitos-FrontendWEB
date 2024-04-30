@@ -9,10 +9,12 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.5s linear;
 }
 
-h2 {
-    
+.container:hover {
+    background-color: rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
 .container form {
@@ -23,7 +25,17 @@ h2 {
 .container input {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #727272;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: transparent;
+    
+}
+
+.container input:hover {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #333;
     border-radius: 5px;
     font-size: 16px;
     background-color: transparent;
@@ -51,7 +63,7 @@ h2 {
 
 .container input:focus {
     outline: none; 
-    border-color: #ccc; 
+    border-color: #333; 
 }
 
 

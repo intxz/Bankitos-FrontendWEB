@@ -45,7 +45,7 @@ function Welcome() {
                 <img className="logoSVG" src={logoSVG} alt="Bankito"/>
             </div>
             {showSignIn && (
-                <div className="centered-sign-in">
+                <div className={`centered-sign-in ${showSignIn ? 'active' : ''}`}>
                     <SignIn />
                 </div>
             )}

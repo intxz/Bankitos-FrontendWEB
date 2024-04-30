@@ -1,16 +1,36 @@
 import React, { useRef, useState } from 'react';
 import './SigIn.css';
+import axios from "axios";
 
 function SignIn() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+          const response = await axios.post('http://localhost:3000/login', {
+            email,
+            password,
+          });
+          console.log(response.data); 
+          setError('fino');
+        } catch (error) {
+          setError('Invalid username or password');
+        }
+      };
 
     return (
         <div className='container'>
             <h2>Log In</h2>
-            <form action="">
-                <input type="email" id="email"  />
-                <input type="password" id="password" />
+            <form onSubmit={handleSubmit}>
+                <input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit">Sign In</button>
             </form>
+            {error && <p>{error}</p>}
         </div> 
     );
 }
