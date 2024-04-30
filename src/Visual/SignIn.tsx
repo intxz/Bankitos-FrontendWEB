@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react';
 import './SigIn.css';
 import axios from "axios";
 
+//const apiUrl = 'http://localhost:3000';
+const apiUrl='//147.83.7.158:3000';
+
 function SignIn() {
 
     const [email, setEmail] = useState('');
@@ -11,7 +14,7 @@ function SignIn() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-          const response = await axios.post('http://localhost:3000/login', {
+          const response = await axios.post(apiUrl+'/login', {
             email,
             password,
           });
