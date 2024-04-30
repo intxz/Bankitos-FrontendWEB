@@ -8,12 +8,9 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.96",
-<<<<<<< HEAD
     "@types/react": "^18.3.0",
     "mongoose": "^8.2.0",
     "@types/react-dom": "^18.3.0",
-=======
->>>>>>> d46cfe958e985dc72acedb050568cb35f5f02842
     "axios": "^1.6.8",
     "mongoose": "^8.2.0",
     "react": "^18.3.0",
