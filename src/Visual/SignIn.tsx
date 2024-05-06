@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import './SigIn.css';
 import axios from "axios";
 
-//const apiUrl = 'http://localhost:3000';
-const apiUrl='//api.bankitos.duckdns.org';
+const apiUrl = 'http://localhost:3000';
+//const apiUrl='//api.bankitos.duckdns.org';
 
 function SignIn() {
 
