@@ -1,92 +1,88 @@
 .container {
-    max-width: 400000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: transparent;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.5s linear;
+  max-width: 400000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.5s linear;
 }
 
 .container:hover {
-    background-color: rgba(0, 0, 0, 0.22);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.22);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
 .container form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .container input {
-    margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 10px;
-    border: 1px solid #727272;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: transparent;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #727272;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: transparent;
 }
 
 .container PhoneNumber {
-    margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 10px;
-    border: 1px solid #727272;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: transparent;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #727272;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: transparent;
 }
 
 .container PhoneNumber:hover {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: transparent;
-    
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: transparent;
 }
 
 .next input {
-    margin-left: 10px;
-    margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .container input:hover {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: transparent;
-    
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: transparent;
 }
 
 .container button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .container button:hover {
-    background-color: #555;
+  background-color: #555;
 }
 
 .container input:focus {
-    outline: none; 
-    border-color: #333; 
+  outline: none;
+  border-color: #333;
 }
-
-
