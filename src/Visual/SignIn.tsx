@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import './SigIn.css';
 import axios from "axios";
 
-//const apiUrl = 'http://localhost:3000';
-const apiUrl='//147.83.7.158:3000';
+const apiUrl = 'http://localhost:3000';
+//const apiUrl='//147.83.7.158:3000';
 
 function SignIn() {
 
@@ -29,8 +29,8 @@ function SignIn() {
         <div className='container'>
             <h2>Log In</h2>
             <form onSubmit={handleSubmit}>
-                <input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
-                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+                <input type="email" id="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                <input type="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit">Sign In</button>
             </form>
             {error && <p>{error}</p>}
