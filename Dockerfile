@@ -1,22 +1,22 @@
-# Fetching the latest node image on alpine linux
-FROM node:alpine AS development
+# Stage 1: Build React app
+FROM node:21-alpine as builder
 
-# Declaring env
-ENV NODE_ENV development
+WORKDIR /app
 
-# Setting up the work directory
-WORKDIR /react-app
-
-# Installing dependencies
-COPY ./package*.json /react-app
-
+COPY package*.json ./
 RUN npm install
 
-# Copying all the files in our project
 COPY . .
+RUN npm run build
 
-# Port
-EXPOSE  3001
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
 
-# Starting our application
-CMD ["npm","start"]
+# Copy static build files from the previous stage
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Default command to run Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]
