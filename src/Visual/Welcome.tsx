@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import "./Welcome.css";
 import logoSVG from "../Images/logo.svg";
+import { useNavigate } from "react-router-dom";
 import BCN from "../Images/xdxd.jpg";
 import SignIn from "./SignIn";
 import SignUp from "./Register";
 
 function Welcome() {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -37,6 +39,10 @@ function Welcome() {
     }
   };
 
+  const hello = () => {
+    navigate("main_page");
+  };
+
   return (
     <div>
       <header>
@@ -46,7 +52,7 @@ function Welcome() {
               &#9776;
             </div>
           </div>
-          <div className="center-text">
+          <div className="center-text" onClick={hello}>
             <h1>Bankitos</h1>
           </div>
           <div className="buttons">

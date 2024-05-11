@@ -1,12 +1,14 @@
 import React, { useRef, useState } from "react";
 import "./SigIn.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//147.83.7.158:3000';
 //const apiUrl='//api.bankitos.duckdns.org';
 
 function SignIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +22,7 @@ function SignIn() {
       });
       console.log(response.data);
       setError("fino");
+      navigate("/main_page");
     } catch (error) {
       setError("Invalid username or password");
     }
