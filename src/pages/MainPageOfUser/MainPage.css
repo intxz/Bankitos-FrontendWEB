@@ -11,6 +11,17 @@
     padding-top: 20px;
 }
 
+.nav-place {
+    width: 200px;
+    height: 100vh;
+    background-color: #00274e; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
 nav header{
     margin-bottom: 10px;
     margin-left: 8px;

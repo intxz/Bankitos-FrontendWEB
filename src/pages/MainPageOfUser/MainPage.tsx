@@ -25,6 +25,13 @@ function MainPage() {
         <a href="4" className="nav-link">4</a>
         <a href="5" className="nav-link">5</a>
       </nav>
+      <nav className="nav-place"> 
+        <a href="1" className="nav-link">1</a>
+        <a href="2" className="nav-link">2</a>
+        <a href="3" className="nav-link">3</a>
+        <a href="4" className="nav-link">4</a>
+        <a href="5" className="nav-link">5</a>
+      </nav>
       <main className="content-container">
         <h1>{token}</h1>
         <h1>{_id}</h1>
