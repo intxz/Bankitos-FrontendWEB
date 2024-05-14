@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Welcome from "./Visual/Welcome";
-import MainPage from "./MainPageOfUser/MainPage";
-import XD from "./MainPageOfUser/xd";
+import Welcome from "./components/welcome/Welcome";
+import MainPage from "./pages/MainPageOfUser/MainPage";
+import XD from "./pages/MainPageOfUser/xd";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import FollowCursorWindow from "./Inclusism/FollowCursorWindow";
+import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
