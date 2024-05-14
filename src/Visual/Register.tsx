@@ -22,7 +22,7 @@ function SignUp() {
   const [passwordV, setPasswordV] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
-  const [date, setDate] = useState("");
+  const [birth_date, setDate] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -35,7 +35,7 @@ function SignUp() {
     passwordV: true,
     phone_number: true,
     gender: true,
-    date: true,
+    birth_date: true,
   });
 
   const validateField = (fieldName: string, value: string) => {
@@ -101,7 +101,7 @@ function SignUp() {
       validateField("passwordV", passwordV);
       validateField("phone_number", phone_number);
       validateField("gender", gender);
-      validateField("date", date);
+      validateField("date", birth_date);
 
       const isFormValid = Object.values(errors).every((error) => error === "");
 
@@ -113,7 +113,7 @@ function SignUp() {
           password,
           phone_number,
           gender,
-          date,
+          birth_date,
         };
         const response = await axios.post(apiUrl + "/users", user);
         console.log(response.data);
@@ -394,19 +394,19 @@ function SignUp() {
           type="date"
           id="date"
           placeholder={
-            !validFields["date"] ? "red-placeholder shake-animation" : ""
+            !validFields["birth_date"] ? "red-placeholder shake-animation" : ""
           }
-          value={date}
+          value={birth_date}
           onChange={(e) => {
             setDate(e.target.value);
             validateField("date", e.target.value);
           }}
           className={
-            !validFields["date"] ? "red-placeholder shake-animation" : ""
+            !validFields["birth_date"] ? "red-placeholder shake-animation" : ""
           }
           style={{
-            border: validFields["date"] ? "1px solid black" : "2px solid red",
-            background: validFields["date"]
+            border: validFields["birth_date"] ? "1px solid black" : "2px solid red",
+            background: validFields["birth_date"]
               ? "transparent"
               : "rgba(255,0,0,0.1)",
           }}

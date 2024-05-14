@@ -17,7 +17,7 @@ export interface User {
   dni?: string;
   personality?: string;
   password: string;
-  date: string;
+  birth_date: string;
   address?: string;
   housing_offered?: string[];
   emergency_contact?: {
