@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Welcome from "./components/welcome/Welcome";
 import MainPage from "./pages/MainPageOfUser/MainPage";
+import CreatePlacePage from './pages/Places/CreatePlacePage'
 import XD from "./pages/MainPageOfUser/xd";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
@@ -11,8 +12,6 @@ import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
-
-
 
 function RoutesApp() {
   const [isFollowCursorActive, setIsFollowCursorActive] = useState(false);
@@ -28,6 +27,7 @@ function RoutesApp() {
           <Route path="/" element={<Welcome />} />
           <Route path="/main_page" element={<MainPage />} />
           <Route path="/xd" element={<XD />} />
+          <Route path="/create_place" element={<CreatePlacePage />} />
         </Routes>
       </Router>
       <button className="btn" onClick={toggleFollowCursor}>

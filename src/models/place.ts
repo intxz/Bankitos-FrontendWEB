@@ -1,4 +1,4 @@
-export interface IPlace {
+export interface Place {
     _id?: string;
     title: string;
     content: string;
@@ -25,7 +25,7 @@ export interface IPlace {
         sunday: string;
     };
     address: string;
-    place_deactivated:boolean;
-    creation_date: Date;
-    modified_date: Date;
+    place_deactivated?:boolean;
+    creation_date?: Date;
+    modified_date?: Date;
 }
