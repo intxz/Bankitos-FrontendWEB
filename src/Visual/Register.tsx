@@ -4,6 +4,7 @@ import { User } from "../USER/user";
 import "./Register.css";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
 // const apiUrl='//147.83.7.158:3000';
@@ -14,6 +15,7 @@ interface FormErrors {
 }
 
 function SignUp() {
+  const navigate = useNavigate();
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -124,6 +126,7 @@ function SignUp() {
         setEmail("");
         setPhoneNumber("");
         setGender("");
+        navigate('/xd')
         console.log("fino");
       } else {
         setError("Please fill in all required fields correctly");

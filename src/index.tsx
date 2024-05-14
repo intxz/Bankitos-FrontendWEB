@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Welcome from "./Visual/Welcome";
 import MainPage from "./MainPageOfUser/MainPage";
+import XD from "./MainPageOfUser/xd";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FollowCursorWindow from "./Inclusism/FollowCursorWindow";
 
@@ -17,6 +18,7 @@ function RoutesApp() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/main_page" element={<MainPage />} />
+        <Route path="/xd" element={<XD />}/>
       </Routes>
     </Router>
   );

@@ -12,6 +12,8 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [token, setToken] = useState<string>("");
+  const [_id, setId] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +24,13 @@ function SignIn() {
       });
       console.log(response.data);
       setError("fino");
+      const recive_token: string = response.data.token;
+      const recive_id: string = response.data._id;
       navigate("/main_page");
+      localStorage.setItem('token', recive_token);
+      setToken(recive_token);
+      localStorage.setItem('_id', recive_id);
+      setId(recive_id);
     } catch (error) {
       setError("Invalid username or password");
     }
