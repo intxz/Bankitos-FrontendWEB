@@ -10,7 +10,7 @@ interface FormErrors {
   [key: string]: string;
 }
 
-function CreatePlace({ _id, token }: { _id: string, token:string }) {
+function CreatePlace({ _id, token }: { _id: string; token: string }) {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -21,35 +21,18 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
   const [bankito, setBankito] = useState(false);
   const [publicplace, setPublicPlace] = useState(false);
   const [covered, setCovered] = useState(false);
-  const [monday, setMonday] = useState("");
-  const [tuesday, setTuesday] = useState("");
-  const [wednesday, setWednesday] = useState("");
-  const [thursday, setThursday] = useState("");
-  const [friday, setFriday] = useState("");
-  const [saturday, setSaturday] = useState("");
-  const [sunday, setSunday] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
 
-  const [validFields, setValidFields] = useState({
-    title: true,
-    content: true,
-    rating: true,
-    latitude: true,
-    longitude: true,
-    photo: true,
-    bankito: true,
-    publicplace: true,
-    covered: true,
-    monday: true,
-    tuesday: true,
-    wednesday: true,
-    thursday: true,
-    friday: true,
-    saturday: true,
-    sunday: true,
-    address: true,
+  const [schedule, setSchedule] = useState({
+    monday: { opening: "", closing: "" },
+    tuesday: { opening: "", closing: "" },
+    wednesday: { opening: "", closing: "" },
+    thursday: { opening: "", closing: "" },
+    friday: { opening: "", closing: "" },
+    saturday: { opening: "", closing: "" },
+    sunday: { opening: "", closing: "" },
   });
 
   const validateField = (fieldName: string, value: string) => {
@@ -82,32 +65,40 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
       [fieldName]: errorMessage,
     }));
 
-    setValidFields((prevValidFields) => ({
-      ...prevValidFields,
-      [fieldName]: isValid,
-    }));
+    return isValid;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      validateField("title", title);
-      validateField("content", content);
-      validateField("rating", rating);
-      validateField("latitude", latitude);
-      validateField("longitude", longitude);
-      validateField("photo", photo);
-      validateField("monday", monday);
-      validateField("tuesday", tuesday);
-      validateField("wednesday", wednesday);
-      validateField("thursday", thursday);
-      validateField("friday", friday);
-      validateField("saturday", saturday);
-      validateField("sunday", sunday);
-      validateField("address", address);
+      const isTitleValid = validateField("title", title);
+      const isContentValid = validateField("content", content);
+      const isRatingValid = validateField("rating", rating);
+      const isLatitudeValid = validateField("latitude", latitude);
+      const isLongitudeValid = validateField("longitude", longitude);
+      const isPhotoValid = validateField("photo", photo);
+      const isAddressValid = validateField("address", address);
 
-      const isFormValid = Object.values(errors).every((error) => error === "");
+      const isFormValid =
+        isTitleValid &&
+        isContentValid &&
+        isRatingValid &&
+        isLatitudeValid &&
+        isLongitudeValid &&
+        isPhotoValid &&
+        isAddressValid;
+
       if (isFormValid) {
+        const formattedSchedule = {
+          monday: `${schedule.monday.opening} - ${schedule.monday.closing}`,
+          tuesday: `${schedule.tuesday.opening} - ${schedule.tuesday.closing}`,
+          wednesday: `${schedule.wednesday.opening} - ${schedule.wednesday.closing}`,
+          thursday: `${schedule.thursday.opening} - ${schedule.thursday.closing}`,
+          friday: `${schedule.friday.opening} - ${schedule.friday.closing}`,
+          saturday: `${schedule.saturday.opening} - ${schedule.saturday.closing}`,
+          sunday: `${schedule.sunday.opening} - ${schedule.sunday.closing}`,
+        };
+
         const newPlace: Place = {
           title,
           content,
@@ -123,27 +114,24 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
             public: publicplace,
             covered,
           },
-          schedule: {
-            monday,
-            tuesday,
-            wednesday,
-            thursday,
-            friday,
-            saturday,
-            sunday,
-          },
+          schedule: formattedSchedule,
           address,
         };
+
         // Set up headers with authorization token
         const headers = {
           "x-access-token": token,
-        };        
+        };
+
         // Make POST request with headers
         const response = await axios.post(apiUrl + "/place", newPlace, {
-          headers: headers,
+          headers,
         });
         console.log(response.data);
         console.log(newPlace);
+        // clear error
+        setError("");
+        alert("Place created successfully");
       } else {
         setError("Please fill in all required fields correctly");
       }
@@ -155,47 +143,60 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
   return (
     <form onSubmit={handleSubmit}>
       {/* Title */}
+      <div>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
+      </div>
       {/* Content */}
+      <div>
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Content"
       />
+      </div>
       {/* Rating */}
+      <div>
       <input
         type="text"
         value={rating}
         onChange={(e) => setRating(e.target.value)}
         placeholder="Rating"
       />
+      </div>
       {/* Latitude */}
+      <div>
       <input
         type="text"
         value={latitude}
         onChange={(e) => setLatitude(e.target.value)}
         placeholder="Latitude"
       />
+      </div>
       {/* Longitude */}
+      <div>
       <input
         type="text"
         value={longitude}
         onChange={(e) => setLongitude(e.target.value)}
         placeholder="Longitude"
       />
+      </div>
       {/* Photo */}
+      <div>
       <input
         type="text"
         value={photo}
         onChange={(e) => setPhoto(e.target.value)}
         placeholder="Photo URL"
       />
+      </div>
       {/* Bankito */}
+      <div>
       <label>
         Bankito:
         <input
@@ -204,7 +205,9 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
           onChange={(e) => setBankito(e.target.checked)}
         />
       </label>
+      </div>
       {/* Public Place */}
+      <div>
       <label>
         Public Place:
         <input
@@ -213,7 +216,9 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
           onChange={(e) => setPublicPlace(e.target.checked)}
         />
       </label>
+      </div>  
       {/* Covered */}
+      <div>
       <label>
         Covered:
         <input
@@ -222,57 +227,205 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
           onChange={(e) => setCovered(e.target.checked)}
         />
       </label>
+      </div>
       {/* Schedule */}
       {/* Monday */}
-      <input
-        type="text"
-        value={monday}
-        onChange={(e) => setMonday(e.target.value)}
-        placeholder="Monday"
-      />
+      <div>
+      <label>
+        Monday:
+        <input
+          type="time"
+          value={schedule.monday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              monday: { ...schedule.monday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.monday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              monday: { ...schedule.monday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
+      {/* Schedule */}
       {/* Tuesday */}
-      <input
-        type="text"
-        value={tuesday}
-        onChange={(e) => setTuesday(e.target.value)}
-        placeholder="Tuesday"
-      />
+      <div>
+      <label>
+        Tuesday:
+        <input
+          type="time"
+          value={schedule.tuesday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              tuesday: { ...schedule.tuesday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.tuesday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              tuesday: { ...schedule.tuesday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
+      {/* Schedule */}
       {/* Wednesday */}
-      <input
-        type="text"
-        value={wednesday}
-        onChange={(e) => setWednesday(e.target.value)}
-        placeholder="Wednesday"
-      />
+      <div>
+      <label>
+        Wednesday:
+        <input
+          type="time"
+          value={schedule.wednesday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              wednesday: { ...schedule.wednesday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.wednesday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              wednesday: { ...schedule.wednesday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
+      {/* Schedule */}
       {/* Thursday */}
-      <input
-        type="text"
-        value={thursday}
-        onChange={(e) => setThursday(e.target.value)}
-        placeholder="Thursday"
-      />
+      <div>
+      <label>
+        Thursday:
+        <input
+          type="time"
+          value={schedule.thursday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              thursday: { ...schedule.thursday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.thursday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              thursday: { ...schedule.thursday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
+      {/* Schedule */}
       {/* Friday */}
-      <input
-        type="text"
-        value={friday}
-        onChange={(e) => setFriday(e.target.value)}
-        placeholder="Friday"
-      />
+      <div>
+      <label>
+        Friday:
+        <input
+          type="time"
+          value={schedule.friday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              friday: { ...schedule.friday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.friday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              friday: { ...schedule.friday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
+      {/* Schedule */}
       {/* Saturday */}
-      <input
-        type="text"
-        value={saturday}
-        onChange={(e) => setSaturday(e.target.value)}
-        placeholder="Saturday"
-      />
+      <div>
+      <label>
+        Saturday:
+        <input
+          type="time"
+          value={schedule.saturday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              saturday: { ...schedule.saturday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.saturday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              saturday: { ...schedule.saturday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
+      {/* Schedule */}
       {/* Sunday */}
-      <input
-        type="text"
-        value={sunday}
-        onChange={(e) => setSunday(e.target.value)}
-        placeholder="Sunday"
-      />
+      <div>
+      <label>
+        Sunday:
+        <input
+          type="time"
+          value={schedule.sunday.opening}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              sunday: { ...schedule.sunday, opening: e.target.value },
+            })
+          }
+        />
+        -
+        <input
+          type="time"
+          value={schedule.sunday.closing}
+          onChange={(e) =>
+            setSchedule({
+              ...schedule,
+              sunday: { ...schedule.sunday, closing: e.target.value },
+            })
+          }
+        />
+      </label>
+      </div>
       {/* Address */}
+      <div>
       <input
         type="text"
         value={address}
@@ -283,6 +436,7 @@ function CreatePlace({ _id, token }: { _id: string, token:string }) {
       <button type="submit">Submit</button>
       {/* Error Message */}
       {error && <div>{error}</div>}
+      </div>
     </form>
   );
 }
