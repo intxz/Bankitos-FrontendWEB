@@ -27,9 +27,9 @@ function SignIn() {
       const recive_token: string = response.data.token;
       const recive_id: string = response.data._id;
       navigate("/main_page");
-      localStorage.setItem('token', recive_token);
+      localStorage.setItem("token", recive_token);
       setToken(recive_token);
-      localStorage.setItem('_id', recive_id);
+      localStorage.setItem("_id", recive_id);
       setId(recive_id);
     } catch (error) {
       setError("Invalid username or password");

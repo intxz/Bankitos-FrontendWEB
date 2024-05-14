@@ -18,7 +18,7 @@ function RoutesApp() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/main_page" element={<MainPage />} />
-        <Route path="/xd" element={<XD />}/>
+        <Route path="/xd" element={<XD />} />
       </Routes>
     </Router>
   );

@@ -106,8 +106,10 @@ function SignUp() {
       validateField("date", birth_date);
 
       const isFormValid = Object.values(errors).every((error) => error === "");
+      const passwordStrength = validatePassword(password);
+      const isPasswordStrong = passwordStrength === 4;
 
-      if (isFormValid) {
+      if (isFormValid && isPasswordStrong) {
         const user: User = {
           first_name,
           last_name,
@@ -126,7 +128,7 @@ function SignUp() {
         setEmail("");
         setPhoneNumber("");
         setGender("");
-        navigate('/xd')
+        navigate("/xd");
         console.log("fino");
       } else {
         setError("Please fill in all required fields correctly");
@@ -408,7 +410,9 @@ function SignUp() {
             !validFields["birth_date"] ? "red-placeholder shake-animation" : ""
           }
           style={{
-            border: validFields["birth_date"] ? "1px solid black" : "2px solid red",
+            border: validFields["birth_date"]
+              ? "1px solid black"
+              : "2px solid red",
             background: validFields["birth_date"]
               ? "transparent"
               : "rgba(255,0,0,0.1)",
