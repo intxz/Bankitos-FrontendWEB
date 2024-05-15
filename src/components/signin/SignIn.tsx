@@ -25,7 +25,7 @@ function SignIn() {
       console.log(response.data);
       setError("fino");
       const received_token: string = response.data.token;
-      const received_id: string = response.data.user._id;
+      const received_id: string = response.data._id;
       localStorage.clear();
       localStorage.setItem("token", received_token);
       setToken(received_token);
