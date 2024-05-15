@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import Welcome from "./components/welcome/Welcome";
 import MainPage from "./pages/MainPageOfUser/MainPage";
 import CreatePlacePage from "./pages/Places/CreatePlacePage";
+import ViewPlacesPage from "./pages/Places/ViewPlacesPage";
 import XD from "./pages/MainPageOfUser/xd";
 import UserProfile from "./components/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -47,6 +48,7 @@ function RoutesApp() {
           <Route path="/main_page" element={<MainPage />} />
           <Route path="/xd" element={<XD />} />
           <Route path="/create_place" element={<CreatePlacePage />} />
+          <Route path="/view_places" element={<ViewPlacesPage />} />
           <Route
             path="/main_page/user_profile"
             element={<UserProfile _id={_id} token={token} />}
