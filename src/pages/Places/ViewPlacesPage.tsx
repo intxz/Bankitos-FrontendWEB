@@ -19,7 +19,6 @@ function ViewPlacesPage() {
   return (
     <div className="containerViewPlacesPage">
       <h1 className="titleViewPlacesPage">View your places</h1>
-      <p>_id={_id} token={token}</p>  
       <ViewPlaces _id={_id} token={token} />
     </div>
   );

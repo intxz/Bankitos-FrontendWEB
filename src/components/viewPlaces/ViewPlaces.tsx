@@ -36,8 +36,6 @@ function ViewPlaces({ _id, token }: { _id: string; token: string }) {
 
   return (
     <div className="containerViewPlaces">
-      <h1 className="titleViewPlaces">Your places</h1>
-      <p>{_id}{token}</p>
       <div className="buttonContainerViewPlaces">
         {/* Render buttons for each place */}
         {places.map((place) => (

@@ -4,14 +4,27 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 1px;
 }
-.buttonContainerDetailsPlace button{
+.scheduleContainerDetailsPlace{
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
+
+.serviceContainerDetailsPlace {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+  border: 10px;
+  margin: 10px 0;
+}
+
 .buttonDetailsPlace {
   width: 50%;
   padding: 5px;
