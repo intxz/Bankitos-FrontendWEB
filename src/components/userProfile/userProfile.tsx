@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../models/user";
-import './userProfile.css'
+import "./userProfile.css";
 
 const apiUrl = "http://localhost:3000";
 
@@ -65,8 +65,8 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
         gender: "",
         description: "",
         birth_date: "",
-        personality: '',
-        photo: "", 
+        personality: "",
+        photo: "",
       });
     } catch (error) {
       setError("Failed to submit the form");
@@ -85,10 +85,12 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
       <div onSubmit={(e) => e.preventDefault()}>
         <header className="header">
           <div className="user-header">
-          <img src={user_data?.photo} alt="Profile" />
-          <div>
-            <p>{user_data?.first_name} {user_data?.last_name}</p>
-          </div>
+            <img src={user_data?.photo} alt="Profile" />
+            <div>
+              <p>
+                {user_data?.first_name} {user_data?.last_name}
+              </p>
+            </div>
           </div>
         </header>
         <div className="content">
