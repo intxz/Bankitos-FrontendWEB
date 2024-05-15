@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import DetailsPlace from "../../components/detailsPlace/DetailsPlace";
 import "./DetailsPlacePage.css";
 
-
 function DetailsPlacePage() {
   const [token, setToken] = useState<string>("");
   const [_id, setId] = useState<string>("");

@@ -5,13 +5,12 @@
   align-items: center;
   flex-direction: column;
 }
-.buttonContainerViewPlaces button{
+.buttonContainerViewPlaces button {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-
 }
 .buttonViewPlaces {
   width: 50%;

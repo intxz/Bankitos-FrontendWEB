@@ -44,38 +44,40 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
       <div>
         <h1 style={{ color: "#fc7a00" }}>{place.title}</h1>
         <div className="containerDetailsPlace">
-        <p>Description: {place.content}</p>
-        <p>Rating: {renderStars(place.rating)}</p>
-        <p>
-          Coordinates: {place.coords.latitude},{place.coords.longitude}
-        </p>
-        <p>Photo: {place.photo}</p>
-        <p>Address: {place.address}</p>
-      
-      <div className="serviceContainerDetailsPlace">
-      <label style={{ fontSize: "25px", color: "#fc7a00" }}>Services:</label>
-        {place.typeOfPlace.bankito && <li>Bankito</li>}
-        {place.typeOfPlace.public && <li>Public Place</li>}
-        {place.typeOfPlace.covered && <li>Covered</li>}
-        </div>
+          <p>Description: {place.content}</p>
+          <p>Rating: {renderStars(place.rating)}</p>
+          <p>
+            Coordinates: {place.coords.latitude},{place.coords.longitude}
+          </p>
+          <p>Photo: {place.photo}</p>
+          <p>Address: {place.address}</p>
+
+          <div className="serviceContainerDetailsPlace">
+            <label style={{ fontSize: "25px", color: "#fc7a00" }}>
+              Services:
+            </label>
+            {place.typeOfPlace.bankito && <li>Bankito</li>}
+            {place.typeOfPlace.public && <li>Public Place</li>}
+            {place.typeOfPlace.covered && <li>Covered</li>}
+          </div>
         </div>
         <div className="scheduleContainerDetailsPlace">
-        <label style={{ fontSize: "25px", color: "#fc7a00" }}>Schedule:</label>
-        <ul>
-          <li>Monday: {place.schedule.monday}</li>
-          <li>Tuesday: {place.schedule.tuesday}</li>
-          <li>Wednesday: {place.schedule.wednesday}</li>
-          <li>Thursday: {place.schedule.thursday}</li>
-          <li>Friday: {place.schedule.friday}</li>
-          <li>Saturday: {place.schedule.saturday}</li>
-          <li>Sunday: {place.schedule.sunday}</li>
-        </ul>
+          <label style={{ fontSize: "25px", color: "#fc7a00" }}>
+            Schedule:
+          </label>
+          <ul>
+            <li>Monday: {place.schedule.monday}</li>
+            <li>Tuesday: {place.schedule.tuesday}</li>
+            <li>Wednesday: {place.schedule.wednesday}</li>
+            <li>Thursday: {place.schedule.thursday}</li>
+            <li>Friday: {place.schedule.friday}</li>
+            <li>Saturday: {place.schedule.saturday}</li>
+            <li>Sunday: {place.schedule.sunday}</li>
+          </ul>
         </div>
-        </div>
+      </div>
     );
   }
 }
-
-
 
 export default DetailsPlace;
