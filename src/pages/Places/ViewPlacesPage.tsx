@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ViewPlaces from "../../components/viewPlaces/ViewPlaces";
 import "./ViewPlacesPage.css";
 
-
 function ViewPlacesPage() {
   const [token, setToken] = useState<string>("");
   const [_id, setId] = useState<string>("");

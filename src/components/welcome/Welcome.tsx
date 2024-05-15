@@ -45,7 +45,7 @@ function Welcome() {
 
   return (
     <div>
-      <header>
+      <header className="header-welcome">
         <div className="container-header">
           <div className="logo-menu">
             <div className="menu-icon" onClick={toggleHeaderExpansion}>

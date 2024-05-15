@@ -24,7 +24,7 @@ function MainPage() {
   return (
     <div className="main-container">
       <nav className="nav-user">
-        <li onClick={hello}>Enlace</li>
+        <li onClick={hello}>Profile</li>
       </nav>
       <nav className="nav-place">
         <a href="1" className="nav-link">
