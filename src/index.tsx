@@ -6,6 +6,7 @@ import Welcome from "./components/welcome/Welcome";
 import MainPage from "./pages/MainPageOfUser/MainPage";
 import CreatePlacePage from "./pages/Places/CreatePlacePage";
 import ViewPlacesPage from "./pages/Places/ViewPlacesPage";
+import DetailsPlacePage from "./pages/Places/DetailsPlacePage";
 import XD from "./pages/MainPageOfUser/xd";
 import UserProfile from "./components/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -49,6 +50,7 @@ function RoutesApp() {
           <Route path="/xd" element={<XD />} />
           <Route path="/create_place" element={<CreatePlacePage />} />
           <Route path="/view_places" element={<ViewPlacesPage />} />
+          <Route path="/place/:placeId" element={<DetailsPlacePage />} />
           <Route
             path="/main_page/user_profile"
             element={<UserProfile _id={_id} token={token} />}
