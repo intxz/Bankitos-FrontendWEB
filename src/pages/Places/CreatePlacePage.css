@@ -1,4 +1,4 @@
-.containerCreatePlacePage h1{
+.containerCreatePlacePage h1 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,5 +8,5 @@
 .titleCreatePlacePage {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color:rgb(252, 122, 0)
+  color: rgb(252, 122, 0);
 }

@@ -144,89 +144,97 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
     <div className="containerCreatePlace">
       <form onSubmit={handleSubmit}>
         {/* Title */}
-        <input className="inputCreatePlace"
+        <input
+          className="inputCreatePlace"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Title"
         />
         {/* Content */}
-        
-        <input className="inputCreatePlace"
+
+        <input
+          className="inputCreatePlace"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Description"
         />
         {/* Rating */}
-        <input className="inputCreatePlace"
+        <input
+          className="inputCreatePlace"
           type="text"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           placeholder="Rating"
         />
         {/* Latitude */}
-        <input className="inputCreatePlace"
+        <input
+          className="inputCreatePlace"
           type="text"
           value={latitude}
           onChange={(e) => setLatitude(e.target.value)}
           placeholder="Latitude"
         />
         {/* Longitude */}
-        <input className="inputCreatePlace"
+        <input
+          className="inputCreatePlace"
           type="text"
           value={longitude}
           onChange={(e) => setLongitude(e.target.value)}
           placeholder="Longitude"
         />
         {/* Photo */}
-        <input className="inputCreatePlace"
+        <input
+          className="inputCreatePlace"
           type="text"
           value={photo}
           onChange={(e) => setPhoto(e.target.value)}
           placeholder="Photo URL"
         />
         {/* Address */}
-        <input className="inputCreatePlace"
+        <input
+          className="inputCreatePlace"
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           placeholder="Address"
         />
         <div className="containerCreatePlaceCheckbox">
-        {/* Bankito */}
-        <label className="labelCreatePlaceCheckbox">
-          Bankito:
-          <input
-            type="checkbox"
-            checked={bankito}
-            onChange={(e) => setBankito(e.target.checked)}
-          />
-        </label>
-        {/* Public Place */}
-        <label className="labelCreatePlaceCheckbox">
-          Public Place:
-          <input
-            type="checkbox"
-            checked={publicplace}
-            onChange={(e) => setPublicPlace(e.target.checked)}
-          />
-        </label>
-        {/* Covered */}
-        <label className="labelCreatePlaceCheckbox">
-          Covered:
-          <input 
-            type="checkbox"
-            checked={covered}
-            onChange={(e) => setCovered(e.target.checked)}
-          />
-        </label>
+          {/* Bankito */}
+          <label className="labelCreatePlaceCheckbox">
+            Bankito:
+            <input
+              type="checkbox"
+              checked={bankito}
+              onChange={(e) => setBankito(e.target.checked)}
+            />
+          </label>
+          {/* Public Place */}
+          <label className="labelCreatePlaceCheckbox">
+            Public Place:
+            <input
+              type="checkbox"
+              checked={publicplace}
+              onChange={(e) => setPublicPlace(e.target.checked)}
+            />
+          </label>
+          {/* Covered */}
+          <label className="labelCreatePlaceCheckbox">
+            Covered:
+            <input
+              type="checkbox"
+              checked={covered}
+              onChange={(e) => setCovered(e.target.checked)}
+            />
+          </label>
         </div>
         {/* Schedule */}
         {/* Monday */}
 
         <label className="labelCreatePlace">
           Monday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.monday.opening}
             onChange={(e) =>
@@ -237,7 +245,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.monday.closing}
             onChange={(e) =>
@@ -253,7 +262,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
 
         <label className="labelCreatePlace">
           Tuesday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.tuesday.opening}
             onChange={(e) =>
@@ -264,7 +274,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.tuesday.closing}
             onChange={(e) =>
@@ -279,7 +290,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         {/* Wednesday */}
         <label className="labelCreatePlace">
           Wednesday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.wednesday.opening}
             onChange={(e) =>
@@ -290,7 +302,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.wednesday.closing}
             onChange={(e) =>
@@ -305,7 +318,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         {/* Thursday */}
         <label className="labelCreatePlace">
           Thursday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.thursday.opening}
             onChange={(e) =>
@@ -316,7 +330,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.thursday.closing}
             onChange={(e) =>
@@ -331,7 +346,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         {/* Friday */}
         <label className="labelCreatePlace">
           Friday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.friday.opening}
             onChange={(e) =>
@@ -342,7 +358,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.friday.closing}
             onChange={(e) =>
@@ -357,7 +374,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         {/* Saturday */}
         <label className="labelCreatePlace">
           Saturday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.saturday.opening}
             onChange={(e) =>
@@ -368,7 +386,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.saturday.closing}
             onChange={(e) =>
@@ -381,9 +400,10 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         </label>
         {/* Schedule */}
         {/* Sunday */}
-        <label className="labelCreatePlace"> 
+        <label className="labelCreatePlace">
           Sunday:
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.sunday.opening}
             onChange={(e) =>
@@ -394,7 +414,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
           -
-          <input className="inputCreatePlaceTime"
+          <input
+            className="inputCreatePlaceTime"
             type="time"
             value={schedule.sunday.closing}
             onChange={(e) =>
@@ -405,9 +426,11 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        
+
         {/* Submit Button */}
-        <button className="buttonCreatePlace" type="submit">Submit</button>
+        <button className="buttonCreatePlace" type="submit">
+          Submit
+        </button>
         {/* Error Message */}
         {error && <div>{error}</div>}
       </form>
