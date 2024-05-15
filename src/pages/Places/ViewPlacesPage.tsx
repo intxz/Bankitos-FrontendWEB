@@ -19,7 +19,7 @@ function ViewPlacesPage() {
   return (
     <div className="containerViewPlacesPage">
       <h1 className="titleViewPlacesPage">View your places</h1>
-      {/* <ViewPlaces _id={_id} token={token} /> */}
+      <ViewPlaces _id={_id} token={token} />
     </div>
   );
 }
