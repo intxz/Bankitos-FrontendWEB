@@ -24,13 +24,14 @@ function SignIn() {
       });
       console.log(response.data);
       setError("fino");
-      const recive_token: string = response.data.token;
-      const recive_id: string = response.data._id;
+      const received_token: string = response.data.token;
+      const received_id: string = response.data.user._id;
+      localStorage.clear();
+      localStorage.setItem("token", received_token);
+      setToken(received_token);
+      localStorage.setItem("_id", received_id);
+      setId(received_id);
       navigate("/main_page");
-      localStorage.setItem("token", recive_token);
-      setToken(recive_token);
-      localStorage.setItem("_id", recive_id);
-      setId(recive_id);
     } catch (error) {
       setError("Invalid username or password");
     }

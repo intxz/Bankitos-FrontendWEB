@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ViewPlaces from "../../components/viewPlaces/ViewPlaces";
-import "./ViewPlacesPage.css";
+import DetailsPlace from "../../components/detailsPlace/DetailsPlace";
+import "./DetailsPlacePage.css";
 
 
-function ViewPlacesPage() {
+function DetailsPlacePage() {
   const [token, setToken] = useState<string>("");
   const [_id, setId] = useState<string>("");
 
@@ -18,11 +18,9 @@ function ViewPlacesPage() {
 
   return (
     <div className="containerViewPlacesPage">
-      <h1 className="titleViewPlacesPage">View your places</h1>
-      <p>_id={_id} token={token}</p>  
-      <ViewPlaces _id={_id} token={token} />
+      <DetailsPlace _id={_id} token={token} />
     </div>
   );
 }
 
-export default ViewPlacesPage;
+export default DetailsPlacePage;
