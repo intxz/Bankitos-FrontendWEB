@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CreatePlace from "../../components/createPlace/CreatePlace";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import "./CreatePlacePage.css";
 
 function CreatePlacePage() {
   const [token, setToken] = useState<string>("");
@@ -17,8 +16,8 @@ function CreatePlacePage() {
   }, []);
 
   return (
-    <div>
-      <h1>Create Place Page</h1>
+    <div className="containerCreatePlacePage">
+      <h1 className="titleCreatePlacePage">Create Place Page</h1>
       <CreatePlace _id={_id} token={token} />
     </div>
   );

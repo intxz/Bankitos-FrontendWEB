@@ -141,303 +141,277 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Title */}
-      <div>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-      />
-      </div>
-      {/* Content */}
-      <div>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Content"
-      />
-      </div>
-      {/* Rating */}
-      <div>
-      <input
-        type="text"
-        value={rating}
-        onChange={(e) => setRating(e.target.value)}
-        placeholder="Rating"
-      />
-      </div>
-      {/* Latitude */}
-      <div>
-      <input
-        type="text"
-        value={latitude}
-        onChange={(e) => setLatitude(e.target.value)}
-        placeholder="Latitude"
-      />
-      </div>
-      {/* Longitude */}
-      <div>
-      <input
-        type="text"
-        value={longitude}
-        onChange={(e) => setLongitude(e.target.value)}
-        placeholder="Longitude"
-      />
-      </div>
-      {/* Photo */}
-      <div>
-      <input
-        type="text"
-        value={photo}
-        onChange={(e) => setPhoto(e.target.value)}
-        placeholder="Photo URL"
-      />
-      </div>
-      {/* Bankito */}
-      <div>
-      <label>
-        Bankito:
-        <input
-          type="checkbox"
-          checked={bankito}
-          onChange={(e) => setBankito(e.target.checked)}
+    <div className="containerCreatePlace">
+      <form onSubmit={handleSubmit}>
+        {/* Title */}
+        <input className="inputCreatePlace"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
         />
-      </label>
-      </div>
-      {/* Public Place */}
-      <div>
-      <label>
-        Public Place:
-        <input
-          type="checkbox"
-          checked={publicplace}
-          onChange={(e) => setPublicPlace(e.target.checked)}
+        {/* Content */}
+        
+        <input className="inputCreatePlace"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Description"
         />
-      </label>
-      </div>  
-      {/* Covered */}
-      <div>
-      <label>
-        Covered:
-        <input
-          type="checkbox"
-          checked={covered}
-          onChange={(e) => setCovered(e.target.checked)}
+        {/* Rating */}
+        <input className="inputCreatePlace"
+          type="text"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+          placeholder="Rating"
         />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Monday */}
-      <div>
-      <label>
-        Monday:
-        <input
-          type="time"
-          value={schedule.monday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              monday: { ...schedule.monday, opening: e.target.value },
-            })
-          }
+        {/* Latitude */}
+        <input className="inputCreatePlace"
+          type="text"
+          value={latitude}
+          onChange={(e) => setLatitude(e.target.value)}
+          placeholder="Latitude"
         />
-        -
-        <input
-          type="time"
-          value={schedule.monday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              monday: { ...schedule.monday, closing: e.target.value },
-            })
-          }
+        {/* Longitude */}
+        <input className="inputCreatePlace"
+          type="text"
+          value={longitude}
+          onChange={(e) => setLongitude(e.target.value)}
+          placeholder="Longitude"
         />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Tuesday */}
-      <div>
-      <label>
-        Tuesday:
-        <input
-          type="time"
-          value={schedule.tuesday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              tuesday: { ...schedule.tuesday, opening: e.target.value },
-            })
-          }
+        {/* Photo */}
+        <input className="inputCreatePlace"
+          type="text"
+          value={photo}
+          onChange={(e) => setPhoto(e.target.value)}
+          placeholder="Photo URL"
         />
-        -
-        <input
-          type="time"
-          value={schedule.tuesday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              tuesday: { ...schedule.tuesday, closing: e.target.value },
-            })
-          }
+        {/* Address */}
+        <input className="inputCreatePlace"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Address"
         />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Wednesday */}
-      <div>
-      <label>
-        Wednesday:
-        <input
-          type="time"
-          value={schedule.wednesday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              wednesday: { ...schedule.wednesday, opening: e.target.value },
-            })
-          }
-        />
-        -
-        <input
-          type="time"
-          value={schedule.wednesday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              wednesday: { ...schedule.wednesday, closing: e.target.value },
-            })
-          }
-        />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Thursday */}
-      <div>
-      <label>
-        Thursday:
-        <input
-          type="time"
-          value={schedule.thursday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              thursday: { ...schedule.thursday, opening: e.target.value },
-            })
-          }
-        />
-        -
-        <input
-          type="time"
-          value={schedule.thursday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              thursday: { ...schedule.thursday, closing: e.target.value },
-            })
-          }
-        />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Friday */}
-      <div>
-      <label>
-        Friday:
-        <input
-          type="time"
-          value={schedule.friday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              friday: { ...schedule.friday, opening: e.target.value },
-            })
-          }
-        />
-        -
-        <input
-          type="time"
-          value={schedule.friday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              friday: { ...schedule.friday, closing: e.target.value },
-            })
-          }
-        />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Saturday */}
-      <div>
-      <label>
-        Saturday:
-        <input
-          type="time"
-          value={schedule.saturday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              saturday: { ...schedule.saturday, opening: e.target.value },
-            })
-          }
-        />
-        -
-        <input
-          type="time"
-          value={schedule.saturday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              saturday: { ...schedule.saturday, closing: e.target.value },
-            })
-          }
-        />
-      </label>
-      </div>
-      {/* Schedule */}
-      {/* Sunday */}
-      <div>
-      <label>
-        Sunday:
-        <input
-          type="time"
-          value={schedule.sunday.opening}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              sunday: { ...schedule.sunday, opening: e.target.value },
-            })
-          }
-        />
-        -
-        <input
-          type="time"
-          value={schedule.sunday.closing}
-          onChange={(e) =>
-            setSchedule({
-              ...schedule,
-              sunday: { ...schedule.sunday, closing: e.target.value },
-            })
-          }
-        />
-      </label>
-      </div>
-      {/* Address */}
-      <div>
-      <input
-        type="text"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="Address"
-      />
-      {/* Submit Button */}
-      <button type="submit">Submit</button>
-      {/* Error Message */}
-      {error && <div>{error}</div>}
-      </div>
-    </form>
+        <div className="containerCreatePlaceCheckbox">
+        {/* Bankito */}
+        <label className="labelCreatePlaceCheckbox">
+          Bankito:
+          <input
+            type="checkbox"
+            checked={bankito}
+            onChange={(e) => setBankito(e.target.checked)}
+          />
+        </label>
+        {/* Public Place */}
+        <label className="labelCreatePlaceCheckbox">
+          Public Place:
+          <input
+            type="checkbox"
+            checked={publicplace}
+            onChange={(e) => setPublicPlace(e.target.checked)}
+          />
+        </label>
+        {/* Covered */}
+        <label className="labelCreatePlaceCheckbox">
+          Covered:
+          <input 
+            type="checkbox"
+            checked={covered}
+            onChange={(e) => setCovered(e.target.checked)}
+          />
+        </label>
+        </div>
+        {/* Schedule */}
+        {/* Monday */}
+
+        <label className="labelCreatePlace">
+          Monday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.monday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                monday: { ...schedule.monday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.monday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                monday: { ...schedule.monday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        {/* Schedule */}
+        {/* Tuesday */}
+
+        <label className="labelCreatePlace">
+          Tuesday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.tuesday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                tuesday: { ...schedule.tuesday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.tuesday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                tuesday: { ...schedule.tuesday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        {/* Schedule */}
+        {/* Wednesday */}
+        <label className="labelCreatePlace">
+          Wednesday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.wednesday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                wednesday: { ...schedule.wednesday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.wednesday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                wednesday: { ...schedule.wednesday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        {/* Schedule */}
+        {/* Thursday */}
+        <label className="labelCreatePlace">
+          Thursday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.thursday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                thursday: { ...schedule.thursday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.thursday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                thursday: { ...schedule.thursday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        {/* Schedule */}
+        {/* Friday */}
+        <label className="labelCreatePlace">
+          Friday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.friday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                friday: { ...schedule.friday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.friday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                friday: { ...schedule.friday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        {/* Schedule */}
+        {/* Saturday */}
+        <label className="labelCreatePlace">
+          Saturday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.saturday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                saturday: { ...schedule.saturday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.saturday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                saturday: { ...schedule.saturday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        {/* Schedule */}
+        {/* Sunday */}
+        <label className="labelCreatePlace"> 
+          Sunday:
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.sunday.opening}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                sunday: { ...schedule.sunday, opening: e.target.value },
+              })
+            }
+          />
+          -
+          <input className="inputCreatePlaceTime"
+            type="time"
+            value={schedule.sunday.closing}
+            onChange={(e) =>
+              setSchedule({
+                ...schedule,
+                sunday: { ...schedule.sunday, closing: e.target.value },
+              })
+            }
+          />
+        </label>
+        
+        {/* Submit Button */}
+        <button className="buttonCreatePlace" type="submit">Submit</button>
+        {/* Error Message */}
+        {error && <div>{error}</div>}
+      </form>
+    </div>
   );
 }
 
