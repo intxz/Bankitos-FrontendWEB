@@ -9,6 +9,7 @@ import ViewPlacesPage from "./pages/Places/ViewPlacesPage";
 import ViewPlacesGeneralPage from "./pages/Places/ViewPlacesGeneralPage";
 import ViewUsersGeneralPage from "./pages/MainPageOfUser/ViewUsersGeneralPage";
 import DetailsPlacePage from "./pages/Places/DetailsPlacePage";
+import EditPlacePage from "./pages/Places/EditPlacePage";
 import XD from "./pages/MainPageOfUser/xd";
 import UserProfile from "./components/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -53,6 +54,7 @@ function RoutesApp() {
           <Route path="/create_place" element={<CreatePlacePage />} />
           <Route path="/view_places" element={<ViewPlacesPage />} />
           <Route path="/place/:placeId" element={<DetailsPlacePage />} />
+          <Route path="/place/edit/:placeId" element={<EditPlacePage />} />
           <Route path="/view_places_general" element={<ViewPlacesGeneralPage />} />
           <Route path="/view_users_general" element={<ViewUsersGeneralPage />} />
           <Route

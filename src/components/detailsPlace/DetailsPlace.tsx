@@ -37,9 +37,24 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
     }
     return stars;
   };
+
+  const handleDelete = async () => {
+    try {
+      const headers = {
+        "x-access-token": token,
+      };
+      await axios.delete(apiUrl + "/place/" + placeId, { headers });
+      navigate("/view_places");
+    } catch (error) {
+      console.error("Error deleting place:", error);
+      // Handle error if necessary
+    }
+  };
+
   if (!place) {
     return <h1>No places found</h1>;
   } else {
+    const isAuthor = place.author === _id;
     return (
       <div>
         <h1 style={{ color: "#fc7a00" }}>{place.title}</h1>
@@ -75,6 +90,24 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
             <li>Sunday: {place.schedule.sunday}</li>
           </ul>
         </div>
+        {isAuthor && (
+          <button
+            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+            onClick={() => navigate(`/place/edit/${placeId}`)}
+            className="buttonDetailsPlace"
+          >
+            Edit
+          </button>
+        )}
+        {isAuthor && (
+          <button
+            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+            onClick={handleDelete}
+            className="buttonDetailsPlace"
+          >
+            Delete
+          </button>
+        )}
       </div>
     );
   }

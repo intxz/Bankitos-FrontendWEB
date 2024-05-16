@@ -1,0 +1,52 @@
+.containerEditPlace form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.containerEditPlaceCheckbox {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: row;
+  margin: 30px 0;
+}
+.inputEditPlace {
+  width: 50%;
+  text-align: center;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+.inputEditPlaceTime {
+  width: auto;
+  text-align: center;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+.labelEditPlaceCheckbox {
+  width: 30%;
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+.labelEditPlace {
+  width: auto;
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+.buttonEditPlace {
+  width: 50%;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #fc7a00;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
