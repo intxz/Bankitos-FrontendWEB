@@ -1,0 +1,25 @@
+.containerViewPlacesGeneral {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.buttonContainerViewPlacesGeneral button {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.buttonViewPlacesGeneral {
+  width: 50%;
+  padding: 5px;
+  margin: 5px 0;
+  border: 0px solid #ccc;
+  border-radius: 15px;
+  background-color: #fc7a00;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
