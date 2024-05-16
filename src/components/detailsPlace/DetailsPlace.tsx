@@ -108,6 +108,13 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
             Delete
           </button>
         )}
+        <button
+            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+            onClick={() => navigate(`/place/create_review/${placeId}`)}
+            className="buttonDetailsPlace"
+          >
+            Add Review
+          </button>
       </div>
     );
   }
