@@ -115,6 +115,13 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
           >
             Add Review
           </button>
+          <button
+            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+            onClick={() => navigate(`/view_reviews/${placeId}`)}
+            className="buttonDetailsPlace"
+          >
+            View Reviews
+          </button>
       </div>
     );
   }
