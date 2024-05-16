@@ -33,6 +33,14 @@ function ViewUsersGeneral({ _id, token }: { _id: string; token: string }) {
     // Redirect to the place details page when a place button is clicked
     navigate(`/user/${userId}`);
   };
+  const renderStars = (rating: string) => {
+    const ratingNumber = parseInt(rating);
+    let stars = [];
+    for (let i = 0; i < ratingNumber; i++) {
+      stars.push(<span key={i}>★</span>);
+    }
+    return stars;
+  };
 
   return (
     <div className="containerViewUsersGeneral">
@@ -46,9 +54,9 @@ function ViewUsersGeneral({ _id, token }: { _id: string; token: string }) {
           >
             {user.first_name + " "} {user.middle_name? user.middle_name + " " : ""} {" " + user.last_name }
             <br />
-            {"Description: " + user.description}
+            {user.description ? "Description: " + user.description : null}
             <br />
-            {"Rate: " + user.user_rating}
+            {renderStars(user.user_rating ? user.user_rating + " " : "")}
           </button>
         ))}
       </div>
