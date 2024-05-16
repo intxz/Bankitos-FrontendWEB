@@ -17,7 +17,7 @@ function ViewReviewsPage() {
 
   return (
     <div className="containerViewReviewsPage">
-      <h1 className="titleViewReviewsPage">View your Reviews</h1>
+      <h1 className="titleViewReviewsPage">Reviews</h1>
       <ViewReviews _id={_id} token={token} />
     </div>
   );

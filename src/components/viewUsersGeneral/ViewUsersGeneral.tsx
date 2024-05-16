@@ -52,7 +52,9 @@ function ViewUsersGeneral({ _id, token }: { _id: string; token: string }) {
             onClick={() => handleUsersClick(user._id || "")}
             className="buttonViewUsersGeneral"
           >
-            {user.first_name + " "} {user.middle_name? user.middle_name + " " : ""} {" " + user.last_name }
+            {user.first_name + " "}{" "}
+            {user.middle_name ? user.middle_name + " " : ""}{" "}
+            {" " + user.last_name}
             <br />
             {user.description ? "Description: " + user.description : null}
             <br />

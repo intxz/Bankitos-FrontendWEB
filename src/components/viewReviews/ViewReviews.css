@@ -1,33 +1,50 @@
-.containerViewReviews {
-  width: 100%;
+.parentContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.buttonContainerViewReviews button {
+.reviewCardContainer {
+  width: 100vh;
   display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-.buttonViewReviews {
-  width: 50%;
-  padding: 5px;
-  margin: 5px 0;
-  border: 0px solid #ccc;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  background-color: #fc7a00;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
+  margin: 5px 0;
 }
+
 .reviewIndividualContainer {
-  width: 100%;
+  width: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  border-radius: 15px;
+}
+
+.reviewCardContainer:hover {
+  background-color: #fc7a004f;
+  box-shadow: 0 0 10px rgba(255, 81, 0, 0.9);
+}
+
+.reviewContent {
+  text-align: left;
+  border-radius: 15px;
   padding: 1px;
+  font-size: 16px;
+}
+
+.aside-1Review {
+  padding: 1px;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+.titleReview {
+  color: #fc7a00;
+  font-size: 25px;
+  font-weight: bold;
 }

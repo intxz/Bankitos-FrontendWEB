@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Place } from "../../models/place";
 import "./EditPlace.css";
@@ -10,7 +10,7 @@ interface FormErrors {
   [key: string]: string;
 }
 
-function EditPlace({ _id, token }: { _id: string; token: string}) {
+function EditPlace({ _id, token }: { _id: string; token: string }) {
   const { placeId } = useParams<{ placeId: string }>();
   const [place, setPlace] = useState<Place>();
 
@@ -18,13 +18,23 @@ function EditPlace({ _id, token }: { _id: string; token: string}) {
   const [title, setTitle] = useState(place?.title || "");
   const [content, setContent] = useState(place?.content || "");
   const [rating, setRating] = useState(place?.rating.toString() || "");
-  const [latitude, setLatitude] = useState(place?.coords.latitude.toString() || "");
-  const [longitude, setLongitude] = useState(place?.coords.longitude.toString() || "");
+  const [latitude, setLatitude] = useState(
+    place?.coords.latitude.toString() || "",
+  );
+  const [longitude, setLongitude] = useState(
+    place?.coords.longitude.toString() || "",
+  );
   const [photo, setPhoto] = useState(place?.photo || "");
   const [address, setAddress] = useState(place?.address || "");
-  const [bankito, setBankito] = useState<boolean>(place?.typeOfPlace?.bankito || false);
-  const [publicplace, setPublicPlace] = useState<boolean>(place?.typeOfPlace?.public || false);
-  const [covered, setCovered] = useState<boolean>(place?.typeOfPlace?.covered || false);
+  const [bankito, setBankito] = useState<boolean>(
+    place?.typeOfPlace?.bankito || false,
+  );
+  const [publicplace, setPublicPlace] = useState<boolean>(
+    place?.typeOfPlace?.public || false,
+  );
+  const [covered, setCovered] = useState<boolean>(
+    place?.typeOfPlace?.covered || false,
+  );
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -78,33 +88,33 @@ function EditPlace({ _id, token }: { _id: string; token: string}) {
       // Update the schedule state based on the values in place.schedule
       setSchedule({
         monday: {
-          opening: place.schedule.monday.split(' - ')[0],
-          closing: place.schedule.monday.split(' - ')[1]
+          opening: place.schedule.monday.split(" - ")[0],
+          closing: place.schedule.monday.split(" - ")[1],
         },
         tuesday: {
-          opening: place.schedule.tuesday.split(' - ')[0],
-          closing: place.schedule.tuesday.split(' - ')[1]
+          opening: place.schedule.tuesday.split(" - ")[0],
+          closing: place.schedule.tuesday.split(" - ")[1],
         },
         wednesday: {
-          opening: place.schedule.wednesday.split(' - ')[0],
-          closing: place.schedule.wednesday.split(' - ')[1]
+          opening: place.schedule.wednesday.split(" - ")[0],
+          closing: place.schedule.wednesday.split(" - ")[1],
         },
         thursday: {
-          opening: place.schedule.thursday.split(' - ')[0],
-          closing: place.schedule.thursday.split(' - ')[1]
+          opening: place.schedule.thursday.split(" - ")[0],
+          closing: place.schedule.thursday.split(" - ")[1],
         },
         friday: {
-          opening: place.schedule.friday.split(' - ')[0],
-          closing: place.schedule.friday.split(' - ')[1]
+          opening: place.schedule.friday.split(" - ")[0],
+          closing: place.schedule.friday.split(" - ")[1],
         },
         saturday: {
-          opening: place.schedule.saturday.split(' - ')[0],
-          closing: place.schedule.saturday.split(' - ')[1]
+          opening: place.schedule.saturday.split(" - ")[0],
+          closing: place.schedule.saturday.split(" - ")[1],
         },
         sunday: {
-          opening: place.schedule.sunday.split(' - ')[0],
-          closing: place.schedule.sunday.split(' - ')[1]
-        }
+          opening: place.schedule.sunday.split(" - ")[0],
+          closing: place.schedule.sunday.split(" - ")[1],
+        },
       });
     }
   }, [place]);
@@ -198,9 +208,13 @@ function EditPlace({ _id, token }: { _id: string; token: string}) {
         };
 
         // Make put request with headers
-        const response = await axios.put(apiUrl + "/place/"+placeId, newPlace, {
-          headers,
-        });
+        const response = await axios.put(
+          apiUrl + "/place/" + placeId,
+          newPlace,
+          {
+            headers,
+          },
+        );
         console.log(response.data);
         console.log(newPlace);
         // clear error

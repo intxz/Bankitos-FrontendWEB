@@ -57,10 +57,19 @@ function RoutesApp() {
           <Route path="/view_places" element={<ViewPlacesPage />} />
           <Route path="/place/:placeId" element={<DetailsPlacePage />} />
           <Route path="/place/edit/:placeId" element={<EditPlacePage />} />
-          <Route path="/place/create_review/:placeId" element={<CreateReviewPage />} />
+          <Route
+            path="/place/create_review/:placeId"
+            element={<CreateReviewPage />}
+          />
           <Route path="/view_reviews/:placeId" element={<ViewReviewsPage />} />
-          <Route path="/view_places_general" element={<ViewPlacesGeneralPage />} />
-          <Route path="/view_users_general" element={<ViewUsersGeneralPage />} />
+          <Route
+            path="/view_places_general"
+            element={<ViewPlacesGeneralPage />}
+          />
+          <Route
+            path="/view_users_general"
+            element={<ViewUsersGeneralPage />}
+          />
           <Route
             path="/main_page/user_profile"
             element={<UserProfile _id={_id} token={token} />}

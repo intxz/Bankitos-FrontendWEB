@@ -27,7 +27,6 @@ function CreateReview({ _id, token }: { _id: string; token: string }) {
       case "title":
       case "content":
       case "stars":
-
         isValid = value.trim() !== "";
         errorMessage = isValid ? "" : `${fieldName} is required`;
         break;
@@ -50,12 +49,9 @@ function CreateReview({ _id, token }: { _id: string; token: string }) {
       const isContentValid = validateField("content", content);
       const isStarsValid = validateField("stars", stars);
 
-      const isFormValid =
-        isTitleValid &&
-        isContentValid &&
-        isStarsValid;
+      const isFormValid = isTitleValid && isContentValid && isStarsValid;
 
-      if( isFormValid) {
+      if (isFormValid) {
         const newReview: Review = {
           title,
           content,

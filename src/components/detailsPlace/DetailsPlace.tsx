@@ -92,7 +92,12 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         </div>
         {isAuthor && (
           <button
-            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
             onClick={() => navigate(`/place/edit/${placeId}`)}
             className="buttonDetailsPlace"
           >
@@ -101,7 +106,12 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         )}
         {isAuthor && (
           <button
-            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
             onClick={handleDelete}
             className="buttonDetailsPlace"
           >
@@ -109,19 +119,29 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
           </button>
         )}
         <button
-            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
-            onClick={() => navigate(`/place/create_review/${placeId}`)}
-            className="buttonDetailsPlace"
-          >
-            Add Review
-          </button>
-          <button
-            style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
-            onClick={() => navigate(`/view_reviews/${placeId}`)}
-            className="buttonDetailsPlace"
-          >
-            View Reviews
-          </button>
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onClick={() => navigate(`/place/create_review/${placeId}`)}
+          className="buttonDetailsPlace"
+        >
+          Add Review
+        </button>
+        <button
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onClick={() => navigate(`/view_reviews/${placeId}`)}
+          className="buttonDetailsPlace"
+        >
+          View Reviews
+        </button>
       </div>
     );
   }
