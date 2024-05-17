@@ -1,0 +1,12 @@
+.containerEditReviewPage h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-shadow: 1px;
+}
+.titleEditReviewPage {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: rgb(252, 122, 0);
+}

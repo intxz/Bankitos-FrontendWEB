@@ -12,6 +12,7 @@ import DetailsPlacePage from "./pages/Places/DetailsPlacePage";
 import EditPlacePage from "./pages/Places/EditPlacePage";
 import CreateReviewPage from "./pages/Reviews/CreateReviewPage";
 import ViewReviewsPage from "./pages/Reviews/ViewReviewsPage";
+import EditReviewPage from "./pages/Reviews/EditReviewPage";
 import XD from "./pages/MainPageOfUser/xd";
 import UserProfile from "./components/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -62,6 +63,7 @@ function RoutesApp() {
             element={<CreateReviewPage />}
           />
           <Route path="/view_reviews/:placeId" element={<ViewReviewsPage />} />
+          <Route path="/review/:reviewId" element={<EditReviewPage />} />
           <Route
             path="/view_places_general"
             element={<ViewPlacesGeneralPage />}

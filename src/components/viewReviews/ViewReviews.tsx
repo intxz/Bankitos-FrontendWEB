@@ -96,10 +96,13 @@ function ViewReviews({ _id, token }: { _id: string; token: string }) {
               <aside className="titleReview">{review.title}</aside>
               {user && user[review.author] && (
                 <aside className="aside-1Review">
-                  {user[review.author].first_name} {user[review.author].last_name}
+                  {user[review.author].first_name}{" "}
+                  {user[review.author].last_name}
                 </aside>
               )}
-              <aside className="aside-2Review">{renderStars(review.stars)}</aside>
+              <aside className="aside-2Review">
+                {renderStars(review.stars)}
+              </aside>
               <article className="reviewContent">
                 <p>{review.content}</p>
               </article>
