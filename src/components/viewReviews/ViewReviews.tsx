@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Review } from "../../models/review";
 import { User } from "../../models/user";
@@ -13,27 +13,24 @@ function ViewReviews({ _id, token }: { _id: string; token: string }) {
   const { placeId } = useParams<{ placeId: string }>();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const headers = {
-          "x-access-token": token,
-        };
-        const response = await axios.get(
-          apiUrl + "/review/byPlace/" + placeId,
-          {
-            headers,
-          },
-        );
-        setReviews(response.data);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-        // Handle error if necessary
-      }
-    };
-
-    fetchReviews();
+  const fetchReviews = useCallback(async () => {
+    try {
+      const headers = {
+        "x-access-token": token,
+      };
+      const response = await axios.get(apiUrl + "/review/byPlace/" + placeId, {
+        headers,
+      });
+      setReviews(response.data);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      // Handle error if necessary
+    }
   }, [placeId, token]);
+
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,16 +38,13 @@ function ViewReviews({ _id, token }: { _id: string; token: string }) {
         const headers = {
           "x-access-token": token,
         };
-        // Create an array to store promises for each user fetch operation
         const userPromises = reviews.map(async (review) => {
           const response = await axios.get(apiUrl + "/users/" + review.author, {
             headers,
           });
           return response.data;
         });
-        // Wait for all promises to resolve
         const userData = await Promise.all(userPromises);
-        // Map user data to object using user IDs as keys
         const userMap: { [key: string]: User } = {};
         userData.forEach((user) => {
           userMap[user._id] = user;
@@ -72,31 +66,75 @@ function ViewReviews({ _id, token }: { _id: string; token: string }) {
     }
     return stars;
   };
+
   const handleEditReview = (reviewId: string) => {
-    // Redirect to the review details page when a review is clicked
     navigate(`/review/${reviewId}`);
+  };
+
+  const handleDelete = async (reviewId: string) => {
+    try {
+      const headers = {
+        "x-access-token": token,
+      };
+      await axios.delete(apiUrl + "/review/" + reviewId, {
+        headers,
+      });
+      await fetchReviews(); // Re-fetch reviews after deletion
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      // Handle error if necessary
+    }
   };
 
   return (
     <div className="parentContainer">
-      {/* Render details for each review */}
-      {reviews.map((review) => (
-        <div key={review._id} className="reviewCardContainer">
-          {/* Display user information */}
-          <div className="reviewIndividualContainer">
-            <aside className="titleReview">{review.title}</aside>
-            {user && user[review.author] && (
-              <aside className="aside-1Review">
-                {user[review.author].first_name} {user[review.author].last_name}
-              </aside>
+      {reviews.map((review) => {
+        const isAuthor = review.author === _id;
+        return (
+          <div key={review._id} className="reviewCardContainer">
+            <div className="reviewIndividualContainer">
+              <aside className="titleReview">{review.title}</aside>
+              {user && user[review.author] && (
+                <aside className="aside-1Review">
+                  {user[review.author].first_name} {user[review.author].last_name}
+                </aside>
+              )}
+              <aside className="aside-2Review">{renderStars(review.stars)}</aside>
+              <article className="reviewContent">
+                <p>{review.content}</p>
+              </article>
+            </div>
+            {isAuthor && review._id && (
+              <>
+                <button
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onClick={() => handleEditReview(review._id || "")}
+                  className="buttonDetailsPlace"
+                >
+                  Edit
+                </button>
+                <button
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onClick={() => handleDelete(review._id || "")}
+                  className="buttonDetailsPlace"
+                >
+                  Delete
+                </button>
+              </>
             )}
-            <aside className="aside-2Review">{renderStars(review.stars)}</aside>
-            <article className="reviewContent">
-              <p>{review.content}</p>
-            </article>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
