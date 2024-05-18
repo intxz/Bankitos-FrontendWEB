@@ -82,17 +82,15 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
 
   return (
     <div>
-      <div onSubmit={(e) => e.preventDefault()}>
-        <header className="header">
-          <div className="user-header">
-            <img src={user_data?.photo} alt="Profile" />
-            <div>
-              <p>
-                {user_data?.first_name} {user_data?.last_name}
-              </p>
-            </div>
+      <div className="header" onSubmit={(e) => e.preventDefault()}>
+        <div className="user-header">
+          <img src={user_data?.photo} alt="Profile" />
+          <div>
+            <p>
+              {user_data?.first_name} {user_data?.last_name}
+            </p>
           </div>
-        </header>
+        </div>
         <div className="content">
           <div className="personality-container">
             <p>Personality</p>
@@ -101,7 +99,7 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
           <div className="description-container">
             <p>Description</p>
             <section className="description-section">
-              <p>{user_data?.description}</p>
+              <p> bbb {user_data?.description}</p>
             </section>
           </div>
           <div className="gender-container">

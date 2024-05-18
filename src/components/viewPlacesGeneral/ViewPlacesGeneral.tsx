@@ -39,22 +39,22 @@ function ViewPlacesGeneral({ _id, token }: { _id: string; token: string }) {
     setSearchText(event.target.value);
   };
 
-  const filteredPlaces = places.filter(place =>
-    place.title.toLowerCase().includes(searchText.toLowerCase())
+  const filteredPlaces = places.filter((place) =>
+    place.title.toLowerCase().includes(searchText.toLowerCase()),
   );
 
   return (
     <div className="containerViewPlacesGeneral">
       <div className="searchContainer">
-      <div className="searchInput">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchText}
-          onChange={handleSearchChange}
-          className="searchInput"
-        />
-      </div>
+        <div className="searchInput">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchText}
+            onChange={handleSearchChange}
+            className="searchInput"
+          />
+        </div>
       </div>
       <div className="buttonContainerViewPlacesGeneral">
         {filteredPlaces.length === 0 ? (

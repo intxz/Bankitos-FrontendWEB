@@ -1,5 +1,5 @@
 /* Estilos para el encabezado */
-.header {
+.user-header {
   background-color: #823;
   color: white;
   padding: 10px 0;
@@ -15,12 +15,6 @@
   justify-content: space-between;
 }
 
-.user-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .user-header p {
   margin: 0;
   margin-right: 15px;
@@ -33,4 +27,8 @@
   height: 70px;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  margin-top: 110px;
 }

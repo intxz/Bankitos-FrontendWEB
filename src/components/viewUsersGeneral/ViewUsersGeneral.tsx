@@ -42,7 +42,7 @@ function ViewUsersGeneral({ _id, token }: { _id: string; token: string }) {
   const filteredUsers = users.filter((user) =>
     `${user.first_name} ${user.middle_name ? user.middle_name + " " : ""} ${user.last_name}`
       .toLowerCase()
-      .includes(searchText.toLowerCase())
+      .includes(searchText.toLowerCase()),
   );
 
   const renderStars = (rating: string) => {
@@ -57,15 +57,15 @@ function ViewUsersGeneral({ _id, token }: { _id: string; token: string }) {
   return (
     <div className="containerViewUsersGeneral">
       <div className="searchContainer">
-      <div className="searchInput">
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={searchText}
-          onChange={handleSearchChange}
-          className="searchInput"
-        />
-      </div>
+        <div className="searchInput">
+          <input
+            type="text"
+            placeholder="Search users..."
+            value={searchText}
+            onChange={handleSearchChange}
+            className="searchInput"
+          />
+        </div>
       </div>
       <div className="buttonContainerViewUsersGeneral">
         {filteredUsers.length === 0 ? (

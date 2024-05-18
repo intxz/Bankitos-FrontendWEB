@@ -58,3 +58,19 @@ main {
     margin: 0;
   }
 }
+
+.centered-delete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.centered-delete {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
