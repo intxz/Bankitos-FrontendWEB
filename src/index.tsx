@@ -33,7 +33,6 @@ function RoutesApp() {
     setIsFollowCursorActive((prev) => !prev);
   };
 
-
   return (
     <React.StrictMode>
       <Helmet>

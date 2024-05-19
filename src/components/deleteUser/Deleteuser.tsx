@@ -1,13 +1,21 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import './DeleteUser.css'
+import "./DeleteUser.css";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//147.83.7.158:3000';
 //const apiUrl='//api.bankitos.duckdns.org';
 
-function DeleteUser({ _id, token, onCancel }: { _id: string; token: string; onCancel: () => void  }) {
+function DeleteUser({
+  _id,
+  token,
+  onCancel,
+}: {
+  _id: string;
+  token: string;
+  onCancel: () => void;
+}) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +45,9 @@ function DeleteUser({ _id, token, onCancel }: { _id: string; token: string; onCa
       <form className="form-delete" onSubmit={handleSubmit}>
         <h3>Are you sure to delete the account?</h3>
         <button type="submit">Delete</button>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
       </form>
       {error && <p>{error}</p>}
     </div>

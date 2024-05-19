@@ -1,4 +1,3 @@
-/* Estilos para el encabezado */
 .user-header {
   background-color: #823;
   color: white;
@@ -16,9 +15,7 @@
 }
 
 .user-header p {
-  margin: 0;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin: 0 15px;
   font-size: 30px;
 }
 
@@ -31,4 +28,94 @@
 
 .content {
   margin-top: 110px;
+  padding: 20px;
+}
+
+.personality-container,
+.description-container,
+.gender-container,
+.birthdate-container {
+  margin-bottom: 20px;
+}
+
+.section-profile {
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  min-height: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.section-profile p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 17px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.section-profile form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-profile textarea {
+  width: calc(100% - 20px);
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+.section-profile button {
+  padding: 8px 12px;
+  margin-top: 5px;
+  margin-right: 5px;
+  border: none;
+  background-color: #823;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.section-profile button:last-child {
+  margin-right: 0;
+}
+
+.section-profile button:hover {
+  background-color: #622;
+}
+
+.section-profile select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'></path></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 12px auto;
+}
+
+.section-profile select:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.section-profile select option {
+  font-size: 16px;
 }
