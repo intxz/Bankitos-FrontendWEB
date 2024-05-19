@@ -74,3 +74,12 @@ main {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
+
+.blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+.profile {
+  z-index: 999;
+}

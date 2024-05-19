@@ -33,14 +33,6 @@ function RoutesApp() {
     setIsFollowCursorActive((prev) => !prev);
   };
 
-  useEffect(() => {
-    const stored_token: string | null = localStorage.getItem("token");
-    const stored_id: string | null = localStorage.getItem("_id");
-    if (stored_token && stored_id) {
-      setToken(stored_token);
-      setId(stored_id);
-    }
-  }, []);
 
   return (
     <React.StrictMode>
@@ -71,10 +63,6 @@ function RoutesApp() {
           <Route
             path="/view_users_general"
             element={<ViewUsersGeneralPage />}
-          />
-          <Route
-            path="/main_page/user_profile"
-            element={<UserProfile _id={_id} token={token} />}
           />
         </Routes>
       </Router>
