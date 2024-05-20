@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MainPage.css";
-import DeleteUser from "../../components/deleteUser/Deleteuser";
-import UserProfile from "../../components/userProfile/userProfile";
+import DeleteUser from "../../components/User/deleteUser/Deleteuser";
+import UserProfile from "../../components/User/userProfile/userProfile";
 import logoSVG from "../../utils/Images/logo.svg";
 
 function MainPage() {
@@ -74,7 +74,7 @@ function MainPage() {
               &#9776;
             </div>
           </div>
-          <div >
+          <div>
             <h1>Bankitos</h1>
           </div>
           <div className="profile-menu">
@@ -106,7 +106,9 @@ function MainPage() {
       </header>
       <div className={`main-container ${blurBody ? "blur" : ""}`}>
         <main className="content-containerMainPage">
-          <h1 className="title-main" style={{ color: "#fc7a00" }}>Welcome to Bankitos</h1>
+          <h1 className="title-main" style={{ color: "#fc7a00" }}>
+            Welcome to Bankitos
+          </h1>
           <p className="text-main">
             Here you can create your own places and share them with the world.
           </p>

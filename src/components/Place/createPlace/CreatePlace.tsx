@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Place } from "../../models/place";
+import { Place } from "../../../models/place";
 import "./CreatePlace.css";
 import { useNavigate } from "react-router-dom";
 

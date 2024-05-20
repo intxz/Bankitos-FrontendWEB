@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Place } from "../../models/place";
+import { Place } from "../../../models/place";
 import "./DetailsPlace.css";
 import { useNavigate, useParams } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CreatePlace from "../../components/createPlace/CreatePlace";
+import CreatePlace from "../../components/Place/createPlace/CreatePlace";
 import "./CreatePlacePage.css";
 
 function CreatePlacePage() {

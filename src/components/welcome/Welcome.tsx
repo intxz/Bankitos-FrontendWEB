@@ -3,8 +3,8 @@ import "./Welcome.css";
 import logoSVG from "../../utils/Images/logo.svg";
 import { useNavigate } from "react-router-dom";
 import BCN from "../Images/xdxd.jpg";
-import SignIn from "../signin/SignIn";
-import SignUp from "../register/Register";
+import SignIn from "../User/signin/SignIn";
+import SignUp from "../User/register/Register";
 
 function Welcome() {
   const navigate = useNavigate();

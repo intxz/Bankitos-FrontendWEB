@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DetailsPlace from "../../components/detailsPlace/DetailsPlace";
+import DetailsPlace from "../../components/Place/detailsPlace/DetailsPlace";
 import "./DetailsPlacePage.css";
 
 function DetailsPlacePage() {
