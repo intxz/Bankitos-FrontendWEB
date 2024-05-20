@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./MainPage.css";
 import DeleteUser from "../../components/deleteUser/Deleteuser";
 import UserProfile from "../../components/userProfile/userProfile";
-import GetUsersGeneral from "../MainPageOfUser/ViewUsersGeneralPage";
-import GetPlacesGeneral from "../Places/ViewPlacesGeneralPage";
-
+import logoSVG from "../../utils/Images/logo.svg";
 
 function MainPage() {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false);
+  const [profileExpanded, setProfileExpanded] = useState(false);
   const [token, setToken] = useState<string>("");
   const [_id, setId] = useState<string>("");
   const [blurBody, setBlurBody] = useState(false);
@@ -28,25 +27,19 @@ function MainPage() {
   const handleShowProfile = () => {
     setShowProfile(true);
     setBlurBody(true);
+    setProfileExpanded(false);
   };
 
   const handleDelete = () => {
     setShowDelete(true);
     setBlurBody(true);
+    setProfileExpanded(false);
   };
 
   const handleCancelDelete = () => {
     setShowDelete(false);
     setBlurBody(false);
   };
-
-  if (showProfile) {
-    return (
-      <div className="profile">
-        <UserProfile _id={_id} token={token} />
-      </div>
-    );
-  }
 
   const GetAllUsersPage = () => {
     navigate("view_users_general");
@@ -56,42 +49,67 @@ function MainPage() {
     navigate("view_places_general");
   };
 
+  const CreateNewPlace = () => {
+    navigate("/create_place");
+  };
+
+  const ViewMyPlaces = () => {
+    navigate("/view_places");
+  };
+
+  const toggleHeaderExpansion = () => {
+    setExpanded(!expanded);
+  };
+
+  const toggleProfileExpansion = () => {
+    setProfileExpanded(!profileExpanded);
+  };
 
   return (
     <div>
+      <header className="header-welcomeMainPage">
+        <div className="container-headerMainPage">
+          <div className="logo-menu">
+            <div className="menu-iconMainPage" onClick={toggleHeaderExpansion}>
+              &#9776;
+            </div>
+          </div>
+          <div >
+            <h1>Bankitos</h1>
+          </div>
+          <div className="profile-menu">
+            <div className="profile-icon" onClick={toggleProfileExpansion}>
+              Profile
+            </div>
+          </div>
+        </div>
+        {expanded && (
+          <nav className="nav-user">
+            <ul>
+              <li onClick={GetAllUsersPage}>Get All Users</li>
+              <li onClick={GetAllPlacesPage}>Get All Places</li>
+            </ul>
+          </nav>
+        )}
+        {profileExpanded && (
+          <nav className="nav-profile">
+            <ul>
+              <li onClick={handleShowProfile}>View Profile</li>
+              <li onClick={CreateNewPlace}>Create New Place</li>
+              <li onClick={ViewMyPlaces}>My Places</li>
+              <li className="delete-account" onClick={handleDelete}>
+                Delete Account
+              </li>
+            </ul>
+          </nav>
+        )}
+      </header>
       <div className={`main-container ${blurBody ? "blur" : ""}`}>
-        <nav className="nav-user">
-          <li onClick={handleShowProfile}>Profile</li>
-          <li className="delete-account" onClick={handleDelete}>
-            Delete account
-          </li>
-          <li className="getusersall" onClick={GetAllUsersPage}>
-            Get All Users
-          </li>
-          <li className="getplacesall" onClick={GetAllPlacesPage}>
-            Get All Places
-          </li>
-        </nav>
-        <nav className="nav-place">
-          <a href="1" className="nav-link">
-            1
-          </a>
-          <a href="2" className="nav-link">
-            2
-          </a>
-          <a href="3" className="nav-link">
-            3
-          </a>
-          <a href="4" className="nav-link">
-            4
-          </a>
-          <a href="5" className="nav-link">
-            9
-          </a>
-        </nav>
-        <main className="content-container">
-          <h1>{token}</h1>
-          <h1>{_id}</h1>
+        <main className="content-containerMainPage">
+          <h1 className="title-main" style={{ color: "#fc7a00" }}>Welcome to Bankitos</h1>
+          <p className="text-main">
+            Here you can create your own places and share them with the world.
+          </p>
         </main>
       </div>
       {showDelete && (
@@ -99,6 +117,14 @@ function MainPage() {
           <DeleteUser _id={_id} token={token} onCancel={handleCancelDelete} />
         </div>
       )}
+      {showProfile && (
+        <div className="profile">
+          <UserProfile _id={_id} token={token} />
+        </div>
+      )}
+      <div className={`container-bodyMainPage ${blurBody ? "blur" : ""}`}>
+        <img className="logoSVG" src={logoSVG} alt="Bankito" />
+      </div>
     </div>
   );
 }

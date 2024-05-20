@@ -1,45 +1,54 @@
+.header-welcomeMainPage {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  border-radius: 10px;
+  padding: 1px 0;
+  transition: height 0.3s ease;
+  z-index: 999;
+}
+
+.container-headerMainPage {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  align-items: center;
+  padding: 10px;
+  max-height: 25px;
+}
+
+.menu-iconMainPage {
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  padding: 10px;
+  background-color: transparent;
+  border: transparent;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+}
+
 .nav-user {
-  width: 200px;
-  height: 100vh;
-  background-color: #00274e;
-  position: fixed;
-  top: 0;
-  right: 0;
+  flex: auto;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  background-color: #333;
   overflow-y: auto;
-  padding-top: 20px;
-}
-
-.nav-place {
-  width: 200px;
-  height: 100vh;
-  background-color: #00274e;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow-y: auto;
-  padding-top: 20px;
-}
-
-nav header {
-  margin-bottom: 10px;
-  margin-left: 8px;
+  border-radius: 10px;
 }
 
 nav li {
   display: block;
-  padding: 10px 20px;
+  padding: 10px;
   text-decoration: none;
-  color: #f0f0f0;
-  transition: background-color 0.3s ease;
-}
-
-nav li:hover {
-  background-color: #000c18;
-}
-
-main {
-  margin-right: 220px;
-  padding: 20px;
+  color:#ffffff;
+  flex: auto;
+  text-align: right;
 }
 
 @media only screen and (max-width: 768px) {
@@ -59,27 +68,32 @@ main {
   }
 }
 
-.centered-delete {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-}
-
-.centered-delete {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
 .blur {
   filter: blur(5px);
   pointer-events: none;
 }
 
 .profile {
-  z-index: 999;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content-containerMainPage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: large;
+}
+
+.container-bodyMainPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  position: relative;
 }
