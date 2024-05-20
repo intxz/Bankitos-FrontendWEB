@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EditReview from "../../components/editReview/EditReview";
+import EditReview from "../../components/Review/editReview/EditReview";
 import "./EditReviewPage.css";
 
 function EditReviewPage() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewUsersGeneral from "../../components/viewUsersGeneral/ViewUsersGeneral";
+import ViewUsersGeneral from "../../components/User/viewUsersGeneral/ViewUsersGeneral";
 import "./ViewUsersGeneralPage.css";
 
 function ViewUsersGeneralPage() {

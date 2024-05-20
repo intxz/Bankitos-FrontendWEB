@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewPlaces from "../../components/viewPlaces/ViewPlaces";
+import ViewPlaces from "../../components/Place/viewPlaces/ViewPlaces";
 import "./ViewPlacesPage.css";
 
 function ViewPlacesPage() {

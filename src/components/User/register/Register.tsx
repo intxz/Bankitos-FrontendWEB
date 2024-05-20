@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { User } from "../../models/user";
+import { User } from "../../../models/user";
 import "./Register.css";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";

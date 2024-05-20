@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Filter from "bad-words";
-import { User } from "../../models/user";
+import { User } from "../../../models/user";
 import "./userProfile.css";
 
 const apiUrl = "http://localhost:3000";

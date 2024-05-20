@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewPlacesGeneral from "../../components/viewPlacesGeneral/ViewPlacesGeneral";
+import ViewPlacesGeneral from "../../components/Place/viewPlacesGeneral/ViewPlacesGeneral";
 import "./ViewPlacesGeneralPage.css";
 
 function ViewPlacesGeneralPage() {

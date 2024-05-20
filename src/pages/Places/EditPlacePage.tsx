@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EditPlace from "../../components/editPlace/EditPlace";
+import EditPlace from "../../components/Place/editPlace/EditPlace";
 import "./EditPlacePage.css";
 
 function EditPlacePage() {

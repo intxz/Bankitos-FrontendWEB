@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Review } from "../../models/review";
+import { Review } from "../../../models/review";
 import "./CreateReview.css";
 import { useNavigate, useParams } from "react-router-dom";
 

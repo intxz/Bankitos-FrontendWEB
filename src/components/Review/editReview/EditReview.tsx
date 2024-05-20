@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Review } from "../../models/review";
+import { Review } from "../../../models/review";
 import "./EditReview.css";
 import { useNavigate, useParams } from "react-router-dom";
 

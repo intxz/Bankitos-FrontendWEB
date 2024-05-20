@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewReviews from "../../components/viewReviews/ViewReviews";
+import ViewReviews from "../../components/Review/viewReviews/ViewReviews";
 import "./ViewReviewsPage.css";
 
 function ViewReviewsPage() {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Review } from "../../models/review";
-import { User } from "../../models/user";
+import { Review } from "../../../models/review";
+import { User } from "../../../models/user";
 import "./ViewReviews.css";
 import { useNavigate, useParams } from "react-router-dom";
 

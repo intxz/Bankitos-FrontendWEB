@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CreateReview from "../../components/createReview/CreateReview";
+import CreateReview from "../../components/Review/createReview/CreateReview";
 import "./CreateReviewPage.css";
 
 function CreateReviewPage() {
