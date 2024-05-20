@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
-//const apiUrl='//147.83.7.158:3000';
 //const apiUrl='//api.bankitos.duckdns.org';
 
 function SignIn() {

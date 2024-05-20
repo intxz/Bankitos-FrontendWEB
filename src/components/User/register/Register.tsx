@@ -7,7 +7,6 @@ import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
-// const apiUrl='//147.83.7.158:3000';
 //const apiUrl='//api.bankitos.duckdns.org';
 
 interface FormErrors {
@@ -128,8 +127,7 @@ function SignUp() {
         setEmail("");
         setPhoneNumber("");
         setGender("");
-        navigate("/xd");
-        console.log("fino");
+        alert("User created successfully\nPlease login");
       } else {
         setError("Please fill in all required fields correctly");
       }

@@ -13,7 +13,6 @@ import EditPlacePage from "./pages/Places/EditPlacePage";
 import CreateReviewPage from "./pages/Reviews/CreateReviewPage";
 import ViewReviewsPage from "./pages/Reviews/ViewReviewsPage";
 import EditReviewPage from "./pages/Reviews/EditReviewPage";
-import XD from "./pages/MainPage/xd";
 import UserProfile from "./components/User/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
@@ -44,7 +43,6 @@ function RoutesApp() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/main_page" element={<MainPage />} />
-          <Route path="/xd" element={<XD />} />
           <Route path="/create_place" element={<CreatePlacePage />} />
           <Route path="/view_places" element={<ViewPlacesPage />} />
           <Route path="/place/:placeId" element={<DetailsPlacePage />} />

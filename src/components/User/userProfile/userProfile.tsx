@@ -6,6 +6,7 @@ import { User } from "../../../models/user";
 import "./userProfile.css";
 
 const apiUrl = "http://localhost:3000";
+//const apiUrl='//api.bankitos.duckdns.org';
 
 const filter = new Filter();
 

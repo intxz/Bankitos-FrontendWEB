@@ -6,6 +6,7 @@ import "./ViewReviews.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
+//const apiUrl='//api.bankitos.duckdns.org';
 
 function ViewReviews({ _id, token }: { _id: string; token: string }) {
   const [reviews, setReviews] = useState<Review[]>([]);

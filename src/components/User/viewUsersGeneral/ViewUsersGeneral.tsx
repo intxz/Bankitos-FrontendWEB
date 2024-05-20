@@ -5,6 +5,7 @@ import "./ViewUsersGeneral.css";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
+//const apiUrl='//api.bankitos.duckdns.org';
 
 function ViewUsersGeneral({ _id, token }: { _id: string; token: string }) {
   const [users, setUsers] = useState<User[]>([]);

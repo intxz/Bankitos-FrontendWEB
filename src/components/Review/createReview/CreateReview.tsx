@@ -5,6 +5,7 @@ import "./CreateReview.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
+//const apiUrl='//api.bankitos.duckdns.org';
 
 interface FormErrors {
   [key: string]: string;
