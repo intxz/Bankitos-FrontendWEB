@@ -4,6 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import "./MainPage.css";
 import DeleteUser from "../../components/deleteUser/Deleteuser";
 import UserProfile from "../../components/userProfile/userProfile";
+import GetUsersGeneral from "../MainPageOfUser/ViewUsersGeneralPage";
+import GetPlacesGeneral from "../Places/ViewPlacesGeneralPage";
+
 
 function MainPage() {
   const navigate = useNavigate();
@@ -45,6 +48,15 @@ function MainPage() {
     );
   }
 
+  const GetAllUsersPage = () => {
+    navigate("view_users_general");
+  };
+
+  const GetAllPlacesPage = () => {
+    navigate("view_places_general");
+  };
+
+
   return (
     <div>
       <div className={`main-container ${blurBody ? "blur" : ""}`}>
@@ -52,6 +64,12 @@ function MainPage() {
           <li onClick={handleShowProfile}>Profile</li>
           <li className="delete-account" onClick={handleDelete}>
             Delete account
+          </li>
+          <li className="getusersall" onClick={GetAllUsersPage}>
+            Get All Users
+          </li>
+          <li className="getplacesall" onClick={GetAllPlacesPage}>
+            Get All Places
           </li>
         </nav>
         <nav className="nav-place">
@@ -68,7 +86,7 @@ function MainPage() {
             4
           </a>
           <a href="5" className="nav-link">
-            5
+            9
           </a>
         </nav>
         <main className="content-container">

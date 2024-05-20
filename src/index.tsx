@@ -56,11 +56,11 @@ function RoutesApp() {
           <Route path="/view_reviews/:placeId" element={<ViewReviewsPage />} />
           <Route path="/review/:reviewId" element={<EditReviewPage />} />
           <Route
-            path="/view_places_general"
+            path="/main_page/view_places_general"
             element={<ViewPlacesGeneralPage />}
           />
           <Route
-            path="/view_users_general"
+            path="/main_page/view_users_general"
             element={<ViewUsersGeneralPage />}
           />
         </Routes>
