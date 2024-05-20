@@ -38,7 +38,7 @@ function RoutesApp() {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Bankitos</title>
-        <link rel="icon" href={logoSVG} />
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       </Helmet>
       <Router>
         <Routes>
