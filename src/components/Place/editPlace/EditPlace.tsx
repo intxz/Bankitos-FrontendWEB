@@ -21,10 +21,10 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
   const [content, setContent] = useState(place?.content || "");
   const [rating, setRating] = useState(place?.rating.toString() || "");
   const [latitude, setLatitude] = useState(
-    place?.coords.latitude.toString() || "",
+    place?.coords.coordinates[1].toString() || "",
   );
   const [longitude, setLongitude] = useState(
-    place?.coords.longitude.toString() || "",
+    place?.coords.coordinates[0].toString() || "",
   );
   const [photo, setPhoto] = useState(place?.photo || "");
   const [address, setAddress] = useState(place?.address || "");
@@ -75,8 +75,8 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
       setTitle(place.title);
       setContent(place.content);
       setRating(place.rating.toString());
-      setLatitude(place.coords.latitude.toString());
-      setLongitude(place.coords.longitude.toString());
+      setLatitude(place.coords.coordinates[1].toString());
+      setLongitude(place.coords.coordinates[0].toString());
       setPhoto(place.photo);
       setAddress(place.address);
       setBankito(place.typeOfPlace.bankito || false);
@@ -191,9 +191,9 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
           author: _id,
           rating: parseFloat(rating),
           coords: {
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude),
-          },
+            type: 'Point',
+            coordinates: [parseFloat(latitude), parseFloat(latitude)],
+        },
           photo,
           typeOfPlace: {
             bankito,
@@ -264,7 +264,7 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
           type="text"
           value={latitude}
           onChange={(e) => setLatitude(e.target.value)}
-          placeholder={place?.coords.latitude.toString()}
+          placeholder={place?.coords.coordinates[1].toString()}
         />
         {/* Longitude */}
         <input
@@ -272,7 +272,7 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
           type="text"
           value={longitude}
           onChange={(e) => setLongitude(e.target.value)}
-          placeholder={place?.coords.longitude.toString()}
+          placeholder={place?.coords.coordinates[0].toString()}
         />
         {/* Photo */}
         <input
