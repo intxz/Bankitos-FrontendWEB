@@ -108,8 +108,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           rating: parseFloat(rating),
           coords: {
             type: 'Point',
-            coordinates: [parseFloat(latitude), parseFloat(latitude)],
-        },
+            coordinates: [parseFloat(latitude), parseFloat(longitude)],
+          },
           photo,
           typeOfPlace: {
             bankito,

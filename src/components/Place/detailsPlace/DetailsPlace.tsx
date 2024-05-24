@@ -44,18 +44,12 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
 
   const fetchBankitos = async () => {
     try {
-      const headers = {
-        "x-access-token": token,
-      };
-        const response = await axios.get(apiUrl + "/place/", {
-            params: {
-                longitude: place?.coords.coordinates[0],
-                latitude: place?.coords.coordinates[1],
-                maxDistanceKm: '50'
-            },
+        const headers = {
+            "x-access-token": token,
+        };
+        const response = await axios.get(`${apiUrl}/bankitos/${place?.coords.coordinates[0]}/${place?.coords.coordinates[1]}/50`, {
             headers,
         });
-        // Establece los bankitos en el estado
         console.log(response.data);
         setBankitos(response.data);
     } catch (error) {
