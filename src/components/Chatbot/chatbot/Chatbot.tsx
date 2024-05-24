@@ -12,13 +12,19 @@ function Chatbot({ _id, token }: { _id: string; token: string }) {
 
     const sendMessage = async () => {
         try {
-            const response = await axios.post(apiUrl + '/chatbot', { message });
+            // Set up headers with authorization token
+            const headers = {
+                "x-access-token": token,
+            };
+            const response = await axios.post(apiUrl + '/chatbot', { message }, { headers });
             setReply(response.data.reply);
+            setMessage(''); // Clear the input field after sending the message
         } catch (error) {
             console.error('Error sending message:', error);
             setError('Failed to send message');
         }
     };
+    
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

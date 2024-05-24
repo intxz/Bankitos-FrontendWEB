@@ -57,6 +57,10 @@ function MainPage() {
     navigate("/view_places");
   };
 
+  const getHelp = () => {
+    navigate("/chatbot");
+  };
+
   const toggleHeaderExpansion = () => {
     setExpanded(!expanded);
   };
@@ -100,6 +104,7 @@ function MainPage() {
               <li className="delete-account" onClick={handleDelete}>
                 Delete Account
               </li>
+              <li onClick={getHelp}>Get Help</li>
             </ul>
           </nav>
         )}
