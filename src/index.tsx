@@ -13,6 +13,7 @@ import EditPlacePage from "./pages/Places/EditPlacePage";
 import CreateReviewPage from "./pages/Reviews/CreateReviewPage";
 import ViewReviewsPage from "./pages/Reviews/ViewReviewsPage";
 import EditReviewPage from "./pages/Reviews/EditReviewPage";
+import ChatbotPage from "./pages/Chatbot/ChatbotPage";
 import UserProfile from "./components/User/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
@@ -53,6 +54,7 @@ function RoutesApp() {
           />
           <Route path="/view_reviews/:placeId" element={<ViewReviewsPage />} />
           <Route path="/review/:reviewId" element={<EditReviewPage />} />
+          <Route path="/chatbot" element={<ChatbotPage />} />
           <Route
             path="/main_page/view_places_general"
             element={<ViewPlacesGeneralPage />}
