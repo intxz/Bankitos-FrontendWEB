@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//api.bankitos.duckdns.org';
 
-
 interface FormErrors {
   [key: string]: string;
 }
@@ -76,8 +75,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
       const isTitleValid = validateField("title", title);
       const isContentValid = validateField("content", content);
       const isRatingValid = validateField("rating", rating);
-      const isLatitudeValid = validateField("latitude", latitude);
-      const isLongitudeValid = validateField("longitude", longitude);
+      const isLatitudeValid = validateField("latitude", latitude) && !isNaN(parseFloat(latitude));
+      const isLongitudeValid = validateField("longitude", longitude) && !isNaN(parseFloat(longitude));
       const isPhotoValid = validateField("photo", photo);
       const isAddressValid = validateField("address", address);
 
@@ -108,7 +107,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           rating: parseFloat(rating),
           coords: {
             type: 'Point',
-            coordinates: [parseFloat(latitude), parseFloat(longitude)],
+            coordinates: [parseFloat(longitude), parseFloat(latitude)],
           },
           photo,
           typeOfPlace: {
@@ -120,17 +119,17 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           address,
         };
 
+        console.log("Sending new place data:", newPlace);  // Log de datos
+
         // Set up headers with authorization token
         const headers = {
           "x-access-token": token,
         };
 
         // Make POST request with headers
-        const response = await axios.post(apiUrl + "/place", newPlace, {
-          headers,
-        });
+        const response = await axios.post(apiUrl + "/place", newPlace, { headers });
         console.log(response.data);
-        console.log(newPlace);
+
         // clear error
         setError("");
         alert("Place created successfully");
@@ -139,6 +138,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         setError("Please fill in all required fields correctly");
       }
     } catch (error) {
+      console.error("Error creating place:", error);
       setError("Failed to submit the form");
     }
   };
@@ -155,7 +155,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           placeholder="Title"
         />
         {/* Content */}
-
         <input
           className="inputCreatePlace"
           value={content}
@@ -233,7 +232,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         </div>
         {/* Schedule */}
         {/* Monday */}
-
         <label className="labelCreatePlace">
           Monday:
           <input
@@ -260,9 +258,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        {/* Schedule */}
         {/* Tuesday */}
-
         <label className="labelCreatePlace">
           Tuesday:
           <input
@@ -289,7 +285,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        {/* Schedule */}
         {/* Wednesday */}
         <label className="labelCreatePlace">
           Wednesday:
@@ -317,7 +312,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        {/* Schedule */}
         {/* Thursday */}
         <label className="labelCreatePlace">
           Thursday:
@@ -345,7 +339,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        {/* Schedule */}
         {/* Friday */}
         <label className="labelCreatePlace">
           Friday:
@@ -373,7 +366,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        {/* Schedule */}
         {/* Saturday */}
         <label className="labelCreatePlace">
           Saturday:
@@ -401,7 +393,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             }
           />
         </label>
-        {/* Schedule */}
         {/* Sunday */}
         <label className="labelCreatePlace">
           Sunday:

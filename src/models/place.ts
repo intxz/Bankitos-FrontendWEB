@@ -5,7 +5,10 @@ export interface Place {
   author: string;
   reviews?: string[];
   rating: number;
-  coords: ICoords;
+  coords: {
+    type: 'Point',
+    coordinates: [number, number]
+};
   photo: string;
   typeOfPlace: {
     bankito: boolean;
@@ -27,7 +30,4 @@ export interface Place {
   modified_date?: Date;
 }
 
-interface ICoords {
-  type: 'Point';
-  coordinates: [number,number]
-}
+
