@@ -7,6 +7,7 @@ import logoSVG from "../../utils/Images/logo.svg";
 
 function MainPage() {
   const navigate = useNavigate();
+  
   const [expanded, setExpanded] = useState(false);
   const [profileExpanded, setProfileExpanded] = useState(false);
   const [token, setToken] = useState<string>("");
