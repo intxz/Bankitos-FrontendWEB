@@ -10,6 +10,7 @@ const apiUrl = "http://localhost:3000";
 
 function DetailsPlace({ _id, token }: { _id: string; token: string }) {
   const [place, setPlace] = useState<Place>();
+  const [bankitos, setBankitos] = useState([]);
   const { placeId } = useParams<{ placeId: string }>();
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         const response = await axios.get(apiUrl + "/place/" + placeId, {
           headers,
         });
+        console.log(response.data);
         setPlace(response.data);
       } catch (error) {
         console.error("Error fetching places:", error);
@@ -40,6 +42,21 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
     return stars;
   };
 
+  const fetchBankitos = async () => {
+    try {
+        const headers = {
+            "x-access-token": token,
+        };
+        const response = await axios.get(`${apiUrl}/bankitos/${place?.coords.coordinates[0]}/${place?.coords.coordinates[1]}/50`, {
+            headers,
+        });
+        console.log(response.data);
+        setBankitos(response.data);
+    } catch (error) {
+        console.error('Error al obtener los bankitos:', error);
+    }
+};
+
   const handleDelete = async () => {
     try {
       const headers = {
@@ -53,6 +70,8 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
     }
   };
 
+
+
   if (!place) {
     return <h1>No places found</h1>;
   } else {
@@ -64,7 +83,7 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
           <p>Description: {place.content}</p>
           <p>Rating: {renderStars(place.rating)}</p>
           <p>
-            Coordinates: {place.coords.latitude},{place.coords.longitude}
+            Coordinates: {place.coords.coordinates[0]}, {place.coords.coordinates[1]}
           </p>
           <p>Photo: {place.photo}</p>
           <p>Address: {place.address}</p>
@@ -144,6 +163,26 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         >
           View Reviews
         </button>
+        <button
+  style={{
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+  onClick={fetchBankitos} // Llama a la función fetchBankitos cuando se hace clic en el botón
+  className="buttonDetailsPlace"
+>
+  Buscar Bankitos
+</button>
+<div>
+  {bankitos.map((place: { title: string }, index: number) => (
+    <div key={index}>
+      <p>Nombre: {place.title}</p>
+      {/* Agrega más información sobre el lugar si lo necesitas */}
+    </div>
+  ))}
+</div>
       </div>
     );
   }
