@@ -29,7 +29,8 @@ function SignIn() {
       localStorage.setItem("token", received_token);
       setToken(received_token);
       localStorage.setItem("_id", received_id);
-      setId(received_id);
+      setId(received_id);      
+
       navigate("/main_page");
     } catch (error) {
       setError("Invalid username or password");

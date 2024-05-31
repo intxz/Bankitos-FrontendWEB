@@ -4,6 +4,10 @@ import "./MainPage.css";
 import DeleteUser from "../../components/User/deleteUser/Deleteuser";
 import UserProfile from "../../components/User/userProfile/userProfile";
 import logoSVG from "../../utils/Images/logo.svg";
+import axios from "axios";
+
+const apiUrl = "http://localhost:3000";
+//const apiUrl='//api.bankitos.duckdns.org';
 
 function MainPage() {
   const navigate = useNavigate();
@@ -70,6 +74,20 @@ function MainPage() {
     setProfileExpanded(!profileExpanded);
   };
 
+  const logout = async () => {
+    try {
+      const headers = {
+        "x-access-token": token,
+      };
+      const response = await axios.post(apiUrl + "/logout", {}, { headers });
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+      // Handle error if necessary
+    }
+  };
+
   return (
     <div>
       <header className="header-welcomeMainPage">
@@ -106,6 +124,7 @@ function MainPage() {
                 Delete Account
               </li>
               <li onClick={getHelp}>Get Help</li>
+              <li onClick={logout}>Logout</li>
             </ul>
           </nav>
         )}
