@@ -5,13 +5,13 @@ import DeleteUser from "../../components/User/deleteUser/Deleteuser";
 import UserProfile from "../../components/User/userProfile/userProfile";
 import logoSVG from "../../utils/Images/logo.svg";
 import axios from "axios";
+import useSocketSetup from "./useSocketSetup";
 
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//api.bankitos.duckdns.org';
 
 function MainPage() {
   const navigate = useNavigate();
-  
   const [expanded, setExpanded] = useState(false);
   const [profileExpanded, setProfileExpanded] = useState(false);
   const [token, setToken] = useState<string>("");
@@ -19,6 +19,8 @@ function MainPage() {
   const [blurBody, setBlurBody] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+
+  useSocketSetup();
 
   useEffect(() => {
     const stored_token: string | null = localStorage.getItem("token");
