@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Welcome from "./components/welcome/Welcome";
@@ -19,10 +19,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
 import { Helmet } from "react-helmet";
 import logoSVG from "./utils/Images/logo.svg";
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
-);
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function RoutesApp() {
   const [isFollowCursorActive, setIsFollowCursorActive] = useState(false);
@@ -71,12 +69,11 @@ function RoutesApp() {
           : "Activate Follow Cursor"}
       </button>
       {isFollowCursorActive && <FollowCursorWindow />}
+      <ToastContainer />
     </React.StrictMode>
   );
 }
 
-root.render(<RoutesApp />);
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+ReactDOM.render(<RoutesApp />, document.getElementById("root"));
+
 reportWebVitals();

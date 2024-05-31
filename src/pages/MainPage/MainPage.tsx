@@ -6,6 +6,8 @@ import UserProfile from "../../components/User/userProfile/userProfile";
 import logoSVG from "../../utils/Images/logo.svg";
 import axios from "axios";
 import useSocketSetup from "./useSocketSetup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//api.bankitos.duckdns.org';
@@ -141,6 +143,7 @@ function MainPage() {
           </p>
         </main>
       </div>
+      <ToastContainer />
       {showDelete && (
         <div className={`centered-delete ${showDelete ? "active" : ""}`}>
           <DeleteUser _id={_id} token={token} onCancel={handleCancelDelete} />
