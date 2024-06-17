@@ -5,7 +5,6 @@ import "./CreateReview.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
-//const apiUrl='//api.bankitos.duckdns.org';
 
 interface FormErrors {
   [key: string]: string;
@@ -66,13 +65,19 @@ function CreateReview({ _id, token }: { _id: string; token: string }) {
           "x-access-token": token,
         };
 
-        // Make POST request with headers
-        const response = await axios.post(apiUrl + "/review", newReview, {
-          headers,
-        });
+        // Make POST request to create review
+        await axios.post(apiUrl + "/review", newReview, { headers });
+
+        // Make PUT request to update place rating
+        const response = await axios.put(
+          apiUrl + `/place/${placeId}/rating`,
+          {},
+          { headers }
+        );
+
         // clear error
         setError("");
-        alert("Review created successfully");
+        alert("Review created successfully and rating updated");
         navigate(`/place/${placeId}`);
       } else {
         setError("Please fill in all required fields correctly");
@@ -94,7 +99,6 @@ function CreateReview({ _id, token }: { _id: string; token: string }) {
           placeholder="Title"
         />
         {/* Content */}
-
         <input
           className="inputCreateReview"
           value={content}

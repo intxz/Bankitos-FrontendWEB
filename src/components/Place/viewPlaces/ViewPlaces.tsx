@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Place } from "../../../models/place";
+import { Review } from "../../../models/review"
 import "./ViewPlaces.css";
 import { useNavigate } from "react-router-dom";
 
