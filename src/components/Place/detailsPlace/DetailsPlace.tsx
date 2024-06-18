@@ -120,7 +120,16 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
             Coordinates: {place.coords.coordinates[0]},{" "}
             {place.coords.coordinates[1]}
           </p>
+<<<<<<< HEAD
           <p>Photo: {place.photo}</p>
+=======
+          <p>Coordinates: {place.coords.coordinates[0]}, {place.coords.coordinates[1]}</p>
+          {place.photo && (
+            <div className="photoContainer">
+              <img src={place.photo} alt="Place" className="placePhoto" />
+            </div>
+          )}
+>>>>>>> 81d521206c0b639b38222d507421d2be75be3bc9
           <p>Address: {place.address}</p>
 
           <div className="serviceContainerDetailsPlace">
@@ -198,19 +207,10 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         >
           View Reviews
         </button>
-        <div>
-          <h2>Reviews</h2>
-          {reviews.map((review) => (
-            <div key={review._id} className="reviewCard">
-              <h3>{review.title}</h3>
-              <p>{renderStars(review.stars)}</p>
-              <p>{review.content}</p>
-            </div>
-          ))}
-        </div>
       </div>
     );
   }
 }
 
 export default DetailsPlace;
+  

@@ -5,7 +5,6 @@ import "./CreatePlace.css";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
-//const apiUrl='//api.bankitos.duckdns.org';
 
 interface FormErrors {
   [key: string]: string;
@@ -69,6 +68,29 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
     return isValid;
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(apiUrl + "/upload", formData, {
+        headers: {
+          "x-access-token": token,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setPhoto(response.data.url); // Update the photo state with the returned URL
+      console.log("Uploaded image:", response.data.url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError("Failed to upload image");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -121,20 +143,26 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           address,
         };
 
+<<<<<<< HEAD
         console.log("Sending new place data:", newPlace); // Log de datos
+=======
+        console.log("Sending new place data:", newPlace);
+>>>>>>> 81d521206c0b639b38222d507421d2be75be3bc9
 
-        // Set up headers with authorization token
         const headers = {
           "x-access-token": token,
         };
 
+<<<<<<< HEAD
         // Make POST request with headers
         const response = await axios.post(apiUrl + "/place", newPlace, {
           headers,
         });
+=======
+        const response = await axios.post(apiUrl + "/place", newPlace, { headers });
+>>>>>>> 81d521206c0b639b38222d507421d2be75be3bc9
         console.log(response.data);
 
-        // clear error
         setError("");
         alert("Place created successfully");
         navigate("/view_places");
@@ -189,13 +217,12 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           onChange={(e) => setLongitude(e.target.value)}
           placeholder="Longitude"
         />
-        {/* Photo */}
+        {/* Photo Upload */}
         <input
           className="inputCreatePlace"
-          type="text"
-          value={photo}
-          onChange={(e) => setPhoto(e.target.value)}
-          placeholder="Photo URL"
+          type="file"
+          onChange={handleFileUpload}
+          placeholder="Upload Photo"
         />
         {/* Address */}
         <input
