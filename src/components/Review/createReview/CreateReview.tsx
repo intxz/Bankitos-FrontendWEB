@@ -68,13 +68,6 @@ function CreateReview({ _id, token }: { _id: string; token: string }) {
         // Make POST request to create review
         await axios.post(apiUrl + "/review", newReview, { headers });
 
-        // Make PUT request to update place rating
-        const response = await axios.put(
-          apiUrl + `/place/${placeId}/rating`,
-          {},
-          { headers }
-        );
-
         // clear error
         setError("");
         alert("Review created successfully and rating updated");
