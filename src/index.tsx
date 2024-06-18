@@ -10,6 +10,7 @@ import ViewPlacesGeneralPage from "./pages/Places/ViewPlacesGeneralPage";
 import ViewUsersGeneralPage from "./pages/MainPage/ViewUsersGeneralPage";
 import DetailsPlacePage from "./pages/Places/DetailsPlacePage";
 import EditPlacePage from "./pages/Places/EditPlacePage";
+import Map from "./components/Place/Map/Map";
 import CreateReviewPage from "./pages/Reviews/CreateReviewPage";
 import ViewReviewsPage from "./pages/Reviews/ViewReviewsPage";
 import EditReviewPage from "./pages/Reviews/EditReviewPage";
@@ -20,6 +21,7 @@ import { Helmet } from "react-helmet";
 import logoSVG from "./utils/Images/logo.svg";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MapPage from "./pages/Places/MapPage";
 
 function RoutesApp() {
   const [isFollowCursorActive, setIsFollowCursorActive] = useState(false);
@@ -41,6 +43,7 @@ function RoutesApp() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/main_page" element={<MainPage />} />
+          <Route path="/map" element={<MapPage />} />
           <Route path="/create_place" element={<CreatePlacePage />} />
           <Route path="/view_places" element={<ViewPlacesPage />} />
           <Route path="/place/:placeId" element={<DetailsPlacePage />} />

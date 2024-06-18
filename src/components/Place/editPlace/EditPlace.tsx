@@ -176,7 +176,6 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
     }
   };
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

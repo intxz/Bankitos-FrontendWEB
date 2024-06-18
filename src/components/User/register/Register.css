@@ -27,13 +27,13 @@
 .container-register .next {
   display: flex;
   justify-content: space-between;
-  gap: 15px; 
+  gap: 15px;
 }
 
 .container-register .next input,
 #phone-number {
   width: 48%;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 #phone-number {
@@ -46,7 +46,7 @@
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #727272;
-  border-radius: 5px; 
+  border-radius: 5px;
   font-size: 16px;
   background-color: transparent;
 }
@@ -108,11 +108,11 @@
   position: relative;
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
-  border-radius: 5px; 
+  border-radius: 5px;
   color: #721c24;
   padding: 5px;
-  font-size: 12px; 
-  max-width: 300px; 
+  font-size: 12px;
+  max-width: 300px;
 }
 
 .password-requirements ul {
@@ -133,7 +133,7 @@
   border: none;
   color: #721c24;
   cursor: pointer;
-  font-size: 12px; 
+  font-size: 12px;
   padding: 0;
   line-height: 1;
 }

@@ -153,7 +153,10 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
           <div className="user-header">
             <div className="photo-container">
               <img src={user_data?.photo} alt="Profile" />
-              <div className="edit-icon" onClick={() => setIsEditingPhoto(true)}>
+              <div
+                className="edit-icon"
+                onClick={() => setIsEditingPhoto(true)}
+              >
                 ✏️
               </div>
               {isEditingPhoto && (
