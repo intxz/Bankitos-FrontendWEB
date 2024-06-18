@@ -1,10 +1,15 @@
 import React, { useRef, useState } from "react";
-import "./SigIn.css";
+import "./SignIn.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+
+
 
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//api.bankitos.duckdns.org';
+
 
 function SignIn() {
   const navigate = useNavigate();
@@ -37,6 +42,31 @@ function SignIn() {
     }
   };
 
+  
+  const handleGoogleLogin = async (credentialResponse:any) => {
+    try {
+      const credentialResponseDecoded:any = jwtDecode(credentialResponse.credential);
+      const idToken = credentialResponse.credential;
+      const email = credentialResponseDecoded.email;
+
+
+      console.log("idToken: ", idToken);
+      console.log("email: ", email);
+      
+      const response = await axios.post(apiUrl + "/googleloginreact", { idToken, email });
+      const { token, _id } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("_id", _id);
+
+      navigate("/main_page");
+    } catch (error) {
+      setError("Google login failed");
+      console.log(error);
+    }
+  };
+
+
   return (
     <div className="container">
       <h2>Log In</h2>
@@ -54,7 +84,10 @@ function SignIn() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Sign In</button>
-      </form>
+      </form> <GoogleLogin
+        onSuccess={handleGoogleLogin}
+        onError={() => setError("Google login failed")}
+      />
       {error && <p>{error}</p>}
     </div>
   );

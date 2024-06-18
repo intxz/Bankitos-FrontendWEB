@@ -22,6 +22,7 @@ import logoSVG from "./utils/Images/logo.svg";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MapPage from "./pages/Places/MapPage";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function RoutesApp() {
   const [isFollowCursorActive, setIsFollowCursorActive] = useState(false);
@@ -76,6 +77,11 @@ function RoutesApp() {
   );
 }
 
-ReactDOM.render(<RoutesApp />, document.getElementById("root"));
+ReactDOM.render(
+  <GoogleOAuthProvider clientId="445123380978-mvj74v61pr1rv34d7a6st0e8e65l5alh.apps.googleusercontent.com">
+    <RoutesApp />
+  </GoogleOAuthProvider>,
+  document.getElementById("root")
+);
 
 reportWebVitals();
