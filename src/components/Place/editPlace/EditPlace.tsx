@@ -153,6 +153,30 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
     return isValid;
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(apiUrl + "/upload", formData, {
+        headers: {
+          "x-access-token": token,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setPhoto(response.data.url); // Update the photo state with the returned URL
+      console.log("Uploaded image:", response.data.url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError("Failed to upload image");
+    }
+  };
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -273,13 +297,12 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
           onChange={(e) => setLongitude(e.target.value)}
           placeholder={place?.coords.coordinates[0].toString()}
         />
-        {/* Photo */}
+        {/* Photo Upload */}
         <input
           className="inputCreatePlace"
-          type="text"
-          value={photo}
-          onChange={(e) => setPhoto(e.target.value)}
-          placeholder={place?.photo}
+          type="file"
+          onChange={handleFileUpload}
+          placeholder="Upload Photo"
         />
         {/* Address */}
         <input
