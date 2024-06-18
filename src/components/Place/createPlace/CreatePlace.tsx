@@ -97,10 +97,8 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
       const isTitleValid = validateField("title", title);
       const isContentValid = validateField("content", content);
       const isRatingValid = validateField("rating", rating);
-      const isLatitudeValid =
-        validateField("latitude", latitude) && !isNaN(parseFloat(latitude));
-      const isLongitudeValid =
-        validateField("longitude", longitude) && !isNaN(parseFloat(longitude));
+      const isLatitudeValid = validateField("latitude", latitude) && !isNaN(parseFloat(latitude));
+      const isLongitudeValid = validateField("longitude", longitude) && !isNaN(parseFloat(longitude));
       const isPhotoValid = validateField("photo", photo);
       const isAddressValid = validateField("address", address);
 
@@ -130,7 +128,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           author: _id,
           rating: parseFloat(rating),
           coords: {
-            type: "Point",
+            type: 'Point',
             coordinates: [parseFloat(longitude), parseFloat(latitude)],
           },
           photo,
@@ -453,3 +451,9 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
 }
 
 export default CreatePlace;
+
+
+
+
+
+
