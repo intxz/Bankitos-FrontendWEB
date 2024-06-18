@@ -119,16 +119,26 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
     });
   };
 
-  const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setUserUpdate({
-          ...user_update,
-          photo: e.target?.result as string,
-        });
-      };
-      reader.readAsDataURL(e.target.files[0]);
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(apiUrl + "/upload", formData, {
+        headers: {
+          "x-access-token": token,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setUserUpdate({ ...user_update, photo: response.data.url }); // Update the user_update state with the returned URL
+      console.log("Uploaded image:", response.data.url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError("Failed to upload image");
     }
   };
 
@@ -139,22 +149,32 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
   return (
     <div className="main-container">
       <div className="content">
-        <div className="header" onSubmit={(e) => e.preventDefault()}>
+        <div className="header">
           <div className="user-header">
             <div className="photo-container">
               <img src={user_data?.photo} alt="Profile" />
-              <div
-                className="edit-icon"
-                onClick={() => setIsEditingPhoto(true)}
-              >
+              <div className="edit-icon" onClick={() => setIsEditingPhoto(true)}>
                 ✏️
               </div>
+              {isEditingPhoto && (
+                <form onSubmit={handleSubmit}>
+                  <input type="file" onChange={handleFileUpload} />
+                  <div>
+                    <button type="submit">Save</button>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingPhoto(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
             <div>
               <p>
                 {user_data?.first_name}{" "}
-                {user_data?.middle_name && `${user_data.middle_name} `}{" "}
-                {/* Mostrar el middle_name solo si está presente */}
+                {user_data?.middle_name && `${user_data.middle_name} `}
                 {user_data?.last_name}
               </p>
             </div>
@@ -222,7 +242,7 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
             </section>
           </div>
           <div className="last-container">
-            <p>Lst Name</p>
+            <p>Last Name</p>
             <section className="section-profile">
               {isEditingLastName ? (
                 <form onSubmit={handleSubmit}>
@@ -398,7 +418,7 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
               <p>{user_data?.phone_number}</p>
             </section>
           </div>
-          <div className="adress-container">
+          <div className="address-container">
             <p>Address</p>
             <section className="section-profile">
               <p>{user_data?.address}</p>

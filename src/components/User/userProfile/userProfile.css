@@ -1,11 +1,11 @@
 .main-container {
-  height: 100vh;
+  height: 70vh;
   width: 1000px;
   overflow: auto;
 }
 
 .user-header {
-  background-color: #823;
+  background-color: #fc7a00;
   color: white;
   padding: 10px 0;
   width: 100%;
@@ -77,7 +77,7 @@
   padding: 10px 15px;
   margin-top: 10px;
   border: none;
-  background-color: #823;
+  background-color: #fc7a00;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -89,5 +89,5 @@
 }
 
 .section-profile button:hover {
-  background-color: #622;
+  background-color: #fc7a00;
 }

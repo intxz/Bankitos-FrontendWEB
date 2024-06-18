@@ -38,6 +38,11 @@ function MainPage() {
     setProfileExpanded(false);
   };
 
+  const handleHideProfile = () => {
+    setShowProfile(false);
+    setBlurBody(false);
+  };
+
   const handleDelete = () => {
     setShowDelete(true);
     setBlurBody(true);
@@ -153,8 +158,11 @@ function MainPage() {
       )}
       {showProfile && (
         <>
-          <div className="overlay" />
+          <div className="overlay" onClick={handleHideProfile} />
           <div className="profile">
+            <button className="close-button" onClick={handleHideProfile}>
+              Close
+            </button>
             <UserProfile _id={_id} token={token} />
           </div>
         </>
