@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { User } from "../../../models/user";
 import "./Register.css";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
@@ -26,6 +24,7 @@ function SignUp() {
   const [birth_date, setDate] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
+  const [showPasswordNotification, setShowPasswordNotification] = useState(true);
 
   const [validFields, setValidFields] = useState({
     first_name: true,
@@ -89,6 +88,15 @@ function SignUp() {
       ...prevValidFields,
       [fieldName]: isValid,
     }));
+  };
+
+  useEffect(() => {
+    const passwordStrength = validatePassword(password);
+    setShowPasswordNotification(passwordStrength < 4);
+  }, [password]);
+
+  const closePasswordNotification = () => {
+    setShowPasswordNotification(false);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -208,8 +216,6 @@ function SignUp() {
     return color;
   })();
 
-  const passwordValidations = validatePassword(password);
-
   return (
     <div className="container-register">
       <h2>Register</h2>
@@ -312,7 +318,7 @@ function SignUp() {
         </div>
         <div className="next">
           <input
-            type="text"
+            type="password"
             id="password"
             placeholder={
               validFields["password"] ? "Password" : "You forgot me :'("
@@ -337,10 +343,10 @@ function SignUp() {
             }}
           />
           <input
-            type="text"
+            type="password"
             id="passwordV"
             placeholder={
-              validFields["passwordV"] ? "Password" : "You forgot me :'("
+              validFields["passwordV"] ? "Verify Password" : "You forgot me :'("
             }
             value={passwordV}
             onChange={(e) => {
@@ -360,6 +366,20 @@ function SignUp() {
             }}
           />
         </div>
+        {showPasswordNotification && (
+          <div className="password-requirements">
+            <p>Password must contain:</p>
+            <ul>
+              <li>At least 8 characters</li>
+              <li>At least 2 digits</li>
+              <li>At least 2 uppercase letters</li>
+              <li>At least 1 special character (!@#$%^&*()_+ etc.)</li>
+            </ul>
+            <button type="button" onClick={closePasswordNotification}>
+              Close
+            </button>
+          </div>
+        )}
         <input
           type="text"
           id="phone-number"
@@ -419,9 +439,7 @@ function SignUp() {
         <button type="submit">Sign Up</button>
       </form>
       {errors["email"] && <span className="error">{errors["email"]}</span>}
-      {errors["passwordV"] && (
-        <span className="error">{errors["passwordV"]}</span>
-      )}
+      {errors["passwordV"] && <span className="error">{errors["passwordV"]}</span>}
       {errors["emailV"] && <span className="error">{errors["emailV"]}</span>}
     </div>
   );

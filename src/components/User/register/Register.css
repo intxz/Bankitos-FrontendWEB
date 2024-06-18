@@ -1,6 +1,7 @@
 .container-register {
-  max-width: 400000px;
+  max-width: 400px;
   margin: 0 auto;
+  margin-top: 50px;
   padding: 20px;
   background-color: transparent;
   border-radius: 10px;
@@ -20,54 +21,43 @@
 .container-register form {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
-.container-register input {
+.container-register .next {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px; 
+}
+
+.container-register .next input,
+#phone-number {
+  width: 48%;
+  border-radius: 5px; 
+}
+
+#phone-number {
+  width: auto;
+}
+
+.container-register input,
+.container-register select,
+.container-register button {
   margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
   padding: 10px;
   border: 1px solid #727272;
-  border-radius: 5px;
+  border-radius: 5px; 
   font-size: 16px;
   background-color: transparent;
 }
 
-.container-register PhoneNumber {
-  margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 10px;
-  border: 1px solid #727272;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: transparent;
-}
-
-.container-register PhoneNumber:hover {
-  margin-bottom: 15px;
-  padding: 10px;
+.container-register input:hover,
+.container-register select:hover {
   border: 1px solid #333;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: transparent;
-}
-
-.next input {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.container-register input:hover {
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: transparent;
 }
 
 .container-register button {
+  width: 100%;
   padding: 10px 20px;
   background-color: #333;
   color: #fff;
@@ -111,4 +101,39 @@
 
 .shake-animation {
   animation: shake 0.5s ease-in-out;
+}
+
+.password-requirements {
+  margin-bottom: 10px;
+  position: relative;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px; 
+  color: #721c24;
+  padding: 5px;
+  font-size: 12px; 
+  max-width: 300px; 
+}
+
+.password-requirements ul {
+  margin: 0;
+  padding-left: 15px;
+}
+
+.password-requirements li {
+  list-style: disc;
+}
+
+.password-requirements button {
+  position: absolute;
+  width: auto;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  color: #721c24;
+  cursor: pointer;
+  font-size: 12px; 
+  padding: 0;
+  line-height: 1;
 }
