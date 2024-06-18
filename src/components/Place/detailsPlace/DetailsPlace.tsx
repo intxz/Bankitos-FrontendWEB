@@ -21,7 +21,9 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         const headers = {
           "x-access-token": token,
         };
-        const response = await axios.get(apiUrl + "/place/" + placeId, { headers });
+        const response = await axios.get(apiUrl + "/place/" + placeId, {
+          headers,
+        });
         setPlace(response.data);
       } catch (error) {
         console.error("Error fetching place:", error);
@@ -33,13 +35,19 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         const headers = {
           "x-access-token": token,
         };
-        const response = await axios.get(apiUrl + "/review/byPlace/" + placeId, { headers });
+        const response = await axios.get(
+          apiUrl + "/review/byPlace/" + placeId,
+          { headers },
+        );
         const reviewsData = response.data;
         setReviews(reviewsData);
         const averageRating = calculateAverageRating(reviewsData);
         setAverageReviewRating(averageRating);
         if (place) {
-          const newCombinedRating = calculateCombinedRating(place.rating, averageRating);
+          const newCombinedRating = calculateCombinedRating(
+            place.rating,
+            averageRating,
+          );
           setCombinedRating(newCombinedRating);
         }
       } catch (error) {
@@ -57,7 +65,10 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
     return totalRating / reviews.length;
   };
 
-  const calculateCombinedRating = (initialRating: number, reviewRating: number) => {
+  const calculateCombinedRating = (
+    initialRating: number,
+    reviewRating: number,
+  ) => {
     return (initialRating + reviewRating) / 2;
   };
 
@@ -66,7 +77,7 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
     for (let i = 0; i < Math.floor(rating); i++) {
       stars.push(<span key={i}>★</span>);
     }
-    
+
     if (rating % 1 !== 0) {
       stars.push(<span key={Math.floor(rating)}>☆</span>);
     }
@@ -95,9 +106,20 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         <div className="containerDetailsPlace">
           <p>Description: {place.content}</p>
           <p>
-            Rating: {renderStars(calculateCombinedRating(place.rating, averageReviewRating))} ({(calculateCombinedRating(place.rating, averageReviewRating)).toFixed(2)})
+            Rating:{" "}
+            {renderStars(
+              calculateCombinedRating(place.rating, averageReviewRating),
+            )}{" "}
+            (
+            {calculateCombinedRating(place.rating, averageReviewRating).toFixed(
+              2,
+            )}
+            )
           </p>
-          <p>Coordinates: {place.coords.coordinates[0]}, {place.coords.coordinates[1]}</p>
+          <p>
+            Coordinates: {place.coords.coordinates[0]},{" "}
+            {place.coords.coordinates[1]}
+          </p>
           {place.photo && (
             <div className="photoContainer">
               <img src={place.photo} alt="Place" className="placePhoto" />
@@ -106,14 +128,18 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
           <p>Address: {place.address}</p>
 
           <div className="serviceContainerDetailsPlace">
-            <label style={{ fontSize: "25px", color: "#fc7a00" }}>Services:</label>
+            <label style={{ fontSize: "25px", color: "#fc7a00" }}>
+              Services:
+            </label>
             {place.typeOfPlace.bankito && <li>Bankito</li>}
             {place.typeOfPlace.public && <li>Public Place</li>}
             {place.typeOfPlace.covered && <li>Covered</li>}
           </div>
         </div>
         <div className="scheduleContainerDetailsPlace">
-          <label style={{ fontSize: "25px", color: "#fc7a00" }}>Schedule:</label>
+          <label style={{ fontSize: "25px", color: "#fc7a00" }}>
+            Schedule:
+          </label>
           <ul>
             <li>Monday: {place.schedule.monday}</li>
             <li>Tuesday: {place.schedule.tuesday}</li>
@@ -127,14 +153,24 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
         {isAuthor && (
           <>
             <button
-              style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
               onClick={() => navigate(`/place/edit/${placeId}`)}
               className="buttonDetailsPlace"
             >
               Edit
             </button>
             <button
-              style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
               onClick={handleDelete}
               className="buttonDetailsPlace"
             >
@@ -143,14 +179,24 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
           </>
         )}
         <button
-          style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
           onClick={() => navigate(`/place/create_review/${placeId}`)}
           className="buttonDetailsPlace"
         >
           Add Review
         </button>
         <button
-          style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
           onClick={() => navigate(`/view_reviews/${placeId}`)}
           className="buttonDetailsPlace"
         >
@@ -162,4 +208,3 @@ function DetailsPlace({ _id, token }: { _id: string; token: string }) {
 }
 
 export default DetailsPlace;
-  

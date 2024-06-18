@@ -24,7 +24,8 @@ function SignUp() {
   const [birth_date, setDate] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
-  const [showPasswordNotification, setShowPasswordNotification] = useState(true);
+  const [showPasswordNotification, setShowPasswordNotification] =
+    useState(true);
 
   const [validFields, setValidFields] = useState({
     first_name: true,
@@ -439,7 +440,9 @@ function SignUp() {
         <button type="submit">Sign Up</button>
       </form>
       {errors["email"] && <span className="error">{errors["email"]}</span>}
-      {errors["passwordV"] && <span className="error">{errors["passwordV"]}</span>}
+      {errors["passwordV"] && (
+        <span className="error">{errors["passwordV"]}</span>
+      )}
       {errors["emailV"] && <span className="error">{errors["emailV"]}</span>}
     </div>
   );
