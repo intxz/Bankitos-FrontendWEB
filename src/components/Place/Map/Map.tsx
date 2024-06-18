@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import axios from "axios";
 import { Place } from "../../../models/place";
@@ -16,6 +16,7 @@ function Map({ _id, token }: MapProps) {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchPlaces = async () => {
@@ -54,6 +55,28 @@ function Map({ _id, token }: MapProps) {
     [85.05112878, 180], // Northeast corner
   ];
 
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPlaces = places.filter((place) =>
+    place.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const foundPlace = filteredPlaces.length > 0 ? filteredPlaces[0] : null;
+
+  function MapCenter({ place }: { place: Place | null }) {
+    const map = useMap();
+    useEffect(() => {
+      if (place) {
+        const [lng, lat] = place.coords.coordinates;
+        map.setView([lat, lng], 15);
+      }
+    }, [place, map]);
+
+    return null;
+  }
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -63,30 +86,43 @@ function Map({ _id, token }: MapProps) {
   }
 
   return (
-    <MapContainer
-      center={[41.2755, 1.986]} // EETAC de Castelldefels
-      zoom={15}
-      style={{ height: "500px", width: "100%" }}
-      maxBounds={mapBounds}
-      maxBoundsViscosity={1.0} // Fully restrict the map to the defined bounds
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    <div>
+      <input
+        type="text"
+        placeholder="Search for a place"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
       />
-      {places.map((place) => (
-        <Marker
-          key={place._id?.toString()}
-          position={place.coords.coordinates}
-          icon={defaultIcon}
-        >
-          <Popup>
-            <strong>{place.title}</strong>
-            <p>Rating: {place.rating}</p>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+      <MapContainer
+        center={[41.27555556, 1.98694444]} // EETAC de Castelldefels
+        zoom={15}
+        style={{ height: "500px", width: "100%" }}
+        maxBounds={mapBounds}
+        maxBoundsViscosity={1.0} // Fully restrict the map to the defined bounds
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {filteredPlaces.map((place) => (
+          <Marker
+            key={place._id?.toString()}
+            position={[
+              place.coords.coordinates[1],
+              place.coords.coordinates[0],
+            ]}
+            icon={defaultIcon}
+          >
+            <Popup>
+              <strong>{place.title}</strong>
+              <p>Rating: {place.rating}</p>
+            </Popup>
+          </Marker>
+        ))}
+        <MapCenter place={foundPlace} />
+      </MapContainer>
+    </div>
   );
 }
 
