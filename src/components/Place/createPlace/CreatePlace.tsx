@@ -143,24 +143,13 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           address,
         };
 
-<<<<<<< HEAD
-        console.log("Sending new place data:", newPlace); // Log de datos
-=======
         console.log("Sending new place data:", newPlace);
->>>>>>> 81d521206c0b639b38222d507421d2be75be3bc9
 
         const headers = {
           "x-access-token": token,
         };
 
-<<<<<<< HEAD
-        // Make POST request with headers
-        const response = await axios.post(apiUrl + "/place", newPlace, {
-          headers,
-        });
-=======
         const response = await axios.post(apiUrl + "/place", newPlace, { headers });
->>>>>>> 81d521206c0b639b38222d507421d2be75be3bc9
         console.log(response.data);
 
         setError("");
