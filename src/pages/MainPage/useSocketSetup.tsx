@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import socket from "../../socket";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const useSocketSetup = () => {
   useEffect(() => {
@@ -11,9 +11,9 @@ const useSocketSetup = () => {
     });
 
     socket.on("user-logged-in", () => {
-        // Show toast notification
-        toast.success(`User logged in`);
-      });
+      // Show toast notification
+      toast.success(`User logged in`);
+    });
 
     return () => {
       // Disconnect socket on unmount

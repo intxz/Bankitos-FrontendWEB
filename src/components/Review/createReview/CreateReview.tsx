@@ -72,7 +72,7 @@ function CreateReview({ _id, token }: { _id: string; token: string }) {
         const response = await axios.put(
           apiUrl + `/place/${placeId}/rating`,
           {},
-          { headers }
+          { headers },
         );
 
         // clear error

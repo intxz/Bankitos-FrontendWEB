@@ -211,7 +211,7 @@ function SignUp() {
   const passwordValidations = validatePassword(password);
 
   return (
-    <div className="container">
+    <div className="container-register">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <div className="next">

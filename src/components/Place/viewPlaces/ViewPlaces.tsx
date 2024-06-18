@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Place } from "../../../models/place";
-import { Review } from "../../../models/review"
+import { Review } from "../../../models/review";
 import "./ViewPlaces.css";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//api.bankitos.duckdns.org';
-
 
 function ViewPlaces({ _id, token }: { _id: string; token: string }) {
   const [places, setPlaces] = useState<Place[]>([]);

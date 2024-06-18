@@ -14,13 +14,12 @@ import CreateReviewPage from "./pages/Reviews/CreateReviewPage";
 import ViewReviewsPage from "./pages/Reviews/ViewReviewsPage";
 import EditReviewPage from "./pages/Reviews/EditReviewPage";
 import ChatbotPage from "./pages/Chatbot/ChatbotPage";
-import UserProfile from "./components/User/userProfile/userProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FollowCursorWindow from "./utils/Inclusism/FollowCursorWindow";
 import { Helmet } from "react-helmet";
 import logoSVG from "./utils/Images/logo.svg";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RoutesApp() {
   const [isFollowCursorActive, setIsFollowCursorActive] = useState(false);

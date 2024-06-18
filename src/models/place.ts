@@ -6,9 +6,9 @@ export interface Place {
   reviews?: string[];
   rating: number;
   coords: {
-    type: 'Point',
-    coordinates: [number, number]
-};
+    type: "Point";
+    coordinates: [number, number];
+  };
   photo: string;
   typeOfPlace: {
     bankito: boolean;
@@ -29,5 +29,3 @@ export interface Place {
   creation_date?: Date;
   modified_date?: Date;
 }
-
-

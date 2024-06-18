@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const apiUrl = "http://localhost:3000";
-//const apiUrl='//api.bankitos.duckdns.org';
 
 function MainPage() {
   const navigate = useNavigate();
@@ -145,14 +144,20 @@ function MainPage() {
       </div>
       <ToastContainer />
       {showDelete && (
-        <div className={`centered-delete ${showDelete ? "active" : ""}`}>
-          <DeleteUser _id={_id} token={token} onCancel={handleCancelDelete} />
-        </div>
+        <>
+          <div className="overlay" />
+          <div className={`centered-delete ${showDelete ? "active" : ""}`}>
+            <DeleteUser _id={_id} token={token} onCancel={handleCancelDelete} />
+          </div>
+        </>
       )}
       {showProfile && (
-        <div className="profile">
-          <UserProfile _id={_id} token={token} />
-        </div>
+        <>
+          <div className="overlay" />
+          <div className="profile">
+            <UserProfile _id={_id} token={token} />
+          </div>
+        </>
       )}
       <div className={`container-bodyMainPage ${blurBody ? "blur" : ""}`}>
         <img className="logoSVG" src={logoSVG} alt="Bankito" />

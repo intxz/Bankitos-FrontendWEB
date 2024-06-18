@@ -1,4 +1,4 @@
-.container {
+.container-register {
   max-width: 400000px;
   margin: 0 auto;
   padding: 20px;
@@ -12,17 +12,17 @@
   transition: background-color 0.5s linear;
 }
 
-.container:hover {
+.container-register:hover {
   background-color: rgba(0, 0, 0, 0.22);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
-.container form {
+.container-register form {
   display: flex;
   flex-direction: column;
 }
 
-.container input {
+.container-register input {
   margin-bottom: 15px;
   margin-left: 10px;
   margin-right: 10px;
@@ -33,7 +33,7 @@
   background-color: transparent;
 }
 
-.container PhoneNumber {
+.container-register PhoneNumber {
   margin-bottom: 15px;
   margin-left: 10px;
   margin-right: 10px;
@@ -44,7 +44,7 @@
   background-color: transparent;
 }
 
-.container PhoneNumber:hover {
+.container-register PhoneNumber:hover {
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #333;
@@ -58,7 +58,7 @@
   margin-right: 10px;
 }
 
-.container input:hover {
+.container-register input:hover {
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #333;
@@ -67,7 +67,7 @@
   background-color: transparent;
 }
 
-.container button {
+.container-register button {
   padding: 10px 20px;
   background-color: #333;
   color: #fff;
@@ -78,11 +78,11 @@
   transition: background-color 0.3s;
 }
 
-.container button:hover {
+.container-register button:hover {
   background-color: #555;
 }
 
-.container input:focus {
+.container-register input:focus {
   outline: none;
   border-color: #333;
 }

@@ -21,9 +21,15 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [isEditingPersonality, setIsEditingPersonality] = useState(false);
   const [isEditingGender, setIsEditingGender] = useState(false);
+  const [isEditingFirstName, setIsEditingFirstName] = useState(false);
+  const [isEditingMiddleName, setIsEditingMiddleName] = useState(false);
+  const [isEditingLastName, setIsEditingLastName] = useState(false);
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [isEditingPhoto, setIsEditingPhoto] = useState(false);
 
   const [user_update, setUserUpdate] = useState<User>({
     first_name: "",
+    middle_name: "",
     last_name: "",
     email: "",
     password: "",
@@ -65,6 +71,7 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
       setUserData(response.data);
       setUserUpdate({
         first_name: "",
+        middle_name: "",
         last_name: "",
         email: "",
         password: "",
@@ -78,6 +85,11 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
       setIsEditingDescription(false);
       setIsEditingGender(false);
       setIsEditingPersonality(false);
+      setIsEditingFirstName(false);
+      setIsEditingMiddleName(false);
+      setIsEditingLastName(false);
+      setIsEditingEmail(false);
+      setIsEditingPhoto(false);
     } catch (error) {
       setError("Failed to submit the form");
     }
@@ -93,14 +105,11 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const inputValue = e.target.value.trim();
-
-    if (inputValue !== null) {
-      setUserUpdate({
-        ...user_update,
-        description: filter.clean(inputValue),
-      });
-    }
+    const { name, value } = e.target;
+    setUserUpdate({
+      ...user_update,
+      [name]: filter.clean(value),
+    });
   };
 
   const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -110,46 +119,168 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
     });
   };
 
+  const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setUserUpdate({
+          ...user_update,
+          photo: e.target?.result as string,
+        });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return dateString.split("T")[0];
   };
 
-  const handleEditDescription = () => {
-    setIsEditingDescription(true);
-  };
-
-  const handleCancelEdit = () => {
-    setIsEditingDescription(false);
-  };
-
-  const handleEditPersonality = () => {
-    setIsEditingPersonality(true);
-  };
-
-  const handleCancelPersonalityEdit = () => {
-    setIsEditingPersonality(false);
-  };
-
-  const handleEditGender = () => {
-    setIsEditingGender(true);
-  };
-
-  const handleCancelGenderEdit = () => {
-    setIsEditingGender(false);
-  };
-
   return (
-    <div>
-      <div className="header" onSubmit={(e) => e.preventDefault()}>
-        <div className="user-header">
-          <img src={user_data?.photo} alt="Profile" />
-          <div>
-            <p>
-              {user_data?.first_name} {user_data?.last_name}
-            </p>
+    <div className="main-container">
+      <div className="content">
+        <div className="header" onSubmit={(e) => e.preventDefault()}>
+          <div className="user-header">
+            <div className="photo-container">
+              <img src={user_data?.photo} alt="Profile" />
+              <div
+                className="edit-icon"
+                onClick={() => setIsEditingPhoto(true)}
+              >
+                ✏️
+              </div>
+            </div>
+            <div>
+              <p>
+                {user_data?.first_name}{" "}
+                {user_data?.middle_name && `${user_data.middle_name} `}{" "}
+                {/* Mostrar el middle_name solo si está presente */}
+                {user_data?.last_name}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="content">
+          <div className="first-container">
+            <p>Name</p>
+            <section className="section-profile">
+              {isEditingFirstName ? (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    name="first_name"
+                    value={user_update.first_name}
+                    onChange={handleChange}
+                  />
+                  <div>
+                    <button type="submit">Save</button>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingFirstName(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <>
+                  <p>{user_data?.first_name}</p>
+                  <button onClick={() => setIsEditingFirstName(true)}>
+                    Edit
+                  </button>
+                </>
+              )}
+            </section>
+          </div>
+          <div className="middle-container">
+            <p>Middle Name</p>
+            <section className="section-profile">
+              {isEditingMiddleName ? (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    name="middle_name"
+                    value={user_update.middle_name}
+                    onChange={handleChange}
+                  />
+                  <div>
+                    <button type="submit">Save</button>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingMiddleName(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <>
+                  <p>{user_data?.middle_name}</p>
+                  <button onClick={() => setIsEditingMiddleName(true)}>
+                    Edit
+                  </button>
+                </>
+              )}
+            </section>
+          </div>
+          <div className="last-container">
+            <p>Lst Name</p>
+            <section className="section-profile">
+              {isEditingLastName ? (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    name="last_name"
+                    value={user_update.last_name}
+                    onChange={handleChange}
+                  />
+                  <div>
+                    <button type="submit">Save</button>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingLastName(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <>
+                  <p>{user_data?.last_name}</p>
+                  <button onClick={() => setIsEditingLastName(true)}>
+                    Edit
+                  </button>
+                </>
+              )}
+            </section>
+          </div>
+          <div className="email-container">
+            <p>Email</p>
+            <section className="section-profile">
+              {isEditingEmail ? (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="email"
+                    name="email"
+                    value={user_update.email}
+                    onChange={handleChange}
+                  />
+                  <div>
+                    <button type="submit">Save</button>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingEmail(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <>
+                  <p>{user_data?.email}</p>
+                  <button onClick={() => setIsEditingEmail(true)}>Edit</button>
+                </>
+              )}
+            </section>
+          </div>
           <div className="personality-container">
             <p>Personality</p>
             <section className="section-profile">
@@ -167,7 +298,10 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
                   </select>
                   <div>
                     <button type="submit">Save</button>
-                    <button type="button" onClick={handleCancelPersonalityEdit}>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingPersonality(false)}
+                    >
                       Cancel
                     </button>
                   </div>
@@ -175,7 +309,9 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
               ) : (
                 <>
                   <p>{user_data?.personality}</p>
-                  <button onClick={handleEditPersonality}>Edit</button>
+                  <button onClick={() => setIsEditingPersonality(true)}>
+                    Edit
+                  </button>
                 </>
               )}
             </section>
@@ -186,12 +322,16 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
               {isEditingDescription ? (
                 <form onSubmit={handleSubmit}>
                   <textarea
+                    name="description"
                     value={user_update.description}
                     onChange={handleChange}
                   />
                   <div>
                     <button type="submit">Save</button>
-                    <button type="button" onClick={handleCancelEdit}>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingDescription(false)}
+                    >
                       Cancel
                     </button>
                   </div>
@@ -199,7 +339,9 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
               ) : (
                 <>
                   <p>{user_data?.description}</p>
-                  <button onClick={handleEditDescription}>Edit</button>
+                  <button onClick={() => setIsEditingDescription(true)}>
+                    Edit
+                  </button>
                 </>
               )}
             </section>
@@ -228,7 +370,10 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
                   </select>
                   <div>
                     <button type="submit">Save</button>
-                    <button type="button" onClick={handleCancelGenderEdit}>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingGender(false)}
+                    >
                       Cancel
                     </button>
                   </div>
@@ -236,7 +381,7 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
               ) : (
                 <>
                   <p>{user_data?.gender}</p>
-                  <button onClick={handleEditGender}>Edit</button>
+                  <button onClick={() => setIsEditingGender(true)}>Edit</button>
                 </>
               )}
             </section>
@@ -245,6 +390,18 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
             <p>Birth Date</p>
             <section className="section-profile">
               <p>{user_data?.birth_date && formatDate(user_data.birth_date)}</p>
+            </section>
+          </div>
+          <div className="phone-container">
+            <p>Phone</p>
+            <section className="section-profile">
+              <p>{user_data?.phone_number}</p>
+            </section>
+          </div>
+          <div className="adress-container">
+            <p>Address</p>
+            <section className="section-profile">
+              <p>{user_data?.address}</p>
             </section>
           </div>
         </div>

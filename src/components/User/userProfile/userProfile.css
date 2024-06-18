@@ -1,13 +1,14 @@
+.main-container {
+  height: 100vh;
+  width: 1000px;
+  overflow: auto;
+}
+
 .user-header {
   background-color: #823;
   color: white;
   padding: 10px 0;
-  position: fixed;
-  z-index: 999;
   width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
   text-align: center;
   display: flex;
   align-items: center;
@@ -20,44 +21,40 @@
 }
 
 .user-header img {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
 }
 
 .content {
-  margin-top: 110px;
-  padding: 20px;
+  margin-top: 15px;
+  padding: 40px;
 }
 
 .personality-container,
 .description-container,
 .gender-container,
 .birthdate-container {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .section-profile {
   background-color: #f0f0f0;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 40px;
+  margin-bottom: 40px;
   border-radius: 15px;
-  min-height: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  word-wrap: break-word;
-  overflow: hidden;
 }
 
 .section-profile p {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  font-size: 17px;
-  white-space: pre-wrap;
-  word-break: break-word;
+  font-size: 20px;
 }
 
 .section-profile form {
@@ -66,26 +63,25 @@
   flex-direction: column;
 }
 
-.section-profile textarea {
+.section-profile textarea,
+.section-profile select {
   width: calc(100% - 20px);
-  min-height: 100px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  resize: vertical;
-  overflow-y: auto;
+  margin-top: 10px;
 }
 
 .section-profile button {
-  padding: 8px 12px;
-  margin-top: 5px;
-  margin-right: 5px;
+  padding: 10px 15px;
+  margin-top: 10px;
   border: none;
   background-color: #823;
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .section-profile button:last-child {
@@ -94,28 +90,4 @@
 
 .section-profile button:hover {
   background-color: #622;
-}
-
-.section-profile select {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  appearance: none;
-  background-color: #fff;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'></path></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px top 50%;
-  background-size: 12px auto;
-}
-
-.section-profile select:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.section-profile select option {
-  font-size: 16px;
 }

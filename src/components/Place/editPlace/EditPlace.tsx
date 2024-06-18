@@ -7,7 +7,6 @@ import { useNavigate, useParams } from "react-router-dom";
 const apiUrl = "http://localhost:3000";
 //const apiUrl='//api.bankitos.duckdns.org';
 
-
 interface FormErrors {
   [key: string]: string;
 }
@@ -191,9 +190,9 @@ function EditPlace({ _id, token }: { _id: string; token: string }) {
           author: _id,
           rating: parseFloat(rating),
           coords: {
-            type: 'Point',
+            type: "Point",
             coordinates: [parseFloat(latitude), parseFloat(latitude)],
-        },
+          },
           photo,
           typeOfPlace: {
             bankito,

@@ -3,7 +3,6 @@
   color: white;
   padding: 10px 0;
   border-radius: 10px;
-  padding: 1px 0;
   transition: height 0.3s ease;
   z-index: 999;
 }
@@ -11,10 +10,8 @@
 .container-headerMainPage {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
   align-items: center;
   padding: 10px;
-  max-height: 25px;
 }
 
 .menu-iconMainPage {
@@ -29,43 +26,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 1;
 }
 
-.nav-user {
-  flex: auto;
-  display: flex;
-  align-items: left;
-  justify-content: left;
+.nav-user,
+.nav-profile {
   background-color: #333;
-  overflow-y: auto;
   border-radius: 10px;
-}
-
-nav li {
-  display: block;
   padding: 10px;
-  text-decoration: none;
-  color: #ffffff;
-  flex: auto;
-  text-align: right;
 }
 
-@media only screen and (max-width: 768px) {
-  nav {
-    width: 100%;
-    height: auto;
-    position: static;
-    overflow-y: visible;
-  }
+.nav-user ul,
+.nav-profile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  main {
-    margin-left: 0;
-  }
-
-  section {
-    margin: 0;
-  }
+.nav-user li,
+.nav-profile li {
+  padding: 10px;
+  color: white;
+  cursor: pointer;
 }
 
 .blur {
@@ -73,21 +54,32 @@ nav li {
   pointer-events: none;
 }
 
-.profile {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.profile,
+.centered-delete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 .content-containerMainPage {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: large;
+  text-align: center;
+  padding: 20px;
 }
 
 .container-bodyMainPage {
@@ -95,5 +87,9 @@ nav li {
   justify-content: center;
   align-items: center;
   height: 30vh;
-  position: relative;
+}
+
+.logoSVG {
+  max-width: 100%;
+  height: auto;
 }
