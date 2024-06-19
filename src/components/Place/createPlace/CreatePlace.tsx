@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Place } from "../../../models/place";
 import "./CreatePlace.css";
 import { useNavigate } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const apiUrl = "http://localhost:3000";
+const openCageApiKey = process.env.REACT_APP_OPENCAGE_API_KEY;
 
 interface FormErrors {
   [key: string]: string;
 }
+
+const defaultIcon = L.icon({
+  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+  shadowSize: [41, 41],
+});
 
 function CreatePlace({ _id, token }: { _id: string; token: string }) {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
   const [photo, setPhoto] = useState("");
   const [bankito, setBankito] = useState(false);
   const [publicplace, setPublicPlace] = useState(false);
@@ -24,6 +37,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [schedule, setSchedule] = useState({
     monday: { opening: "", closing: "" },
@@ -43,16 +57,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
       case "title":
       case "content":
       case "rating":
-      case "latitude":
-      case "longitude":
       case "photo":
-      case "monday":
-      case "tuesday":
-      case "wednesday":
-      case "thursday":
-      case "friday":
-      case "saturday":
-      case "sunday":
       case "address":
         isValid = value.trim() !== "";
         break;
@@ -97,10 +102,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
       const isTitleValid = validateField("title", title);
       const isContentValid = validateField("content", content);
       const isRatingValid = validateField("rating", rating);
-      const isLatitudeValid =
-        validateField("latitude", latitude) && !isNaN(parseFloat(latitude));
-      const isLongitudeValid =
-        validateField("longitude", longitude) && !isNaN(parseFloat(longitude));
       const isPhotoValid = validateField("photo", photo);
       const isAddressValid = validateField("address", address);
 
@@ -108,10 +109,10 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
         isTitleValid &&
         isContentValid &&
         isRatingValid &&
-        isLatitudeValid &&
-        isLongitudeValid &&
         isPhotoValid &&
-        isAddressValid;
+        isAddressValid &&
+        latitude !== null &&
+        longitude !== null;
 
       if (isFormValid) {
         const formattedSchedule = {
@@ -131,7 +132,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           rating: parseFloat(rating),
           coords: {
             type: "Point",
-            coordinates: [parseFloat(longitude), parseFloat(latitude)],
+            coordinates: [longitude, latitude],
           },
           photo,
           typeOfPlace: {
@@ -166,9 +167,101 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
     }
   };
 
+  const handleMapClick = async (e: any) => {
+    const { lat, lng } = e.latlng;
+    setLatitude(lat);
+    setLongitude(lng);
+
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${openCageApiKey}`
+      );
+      const result = response.data.results[0];
+      if (result) {
+        setAddress(result.formatted);
+      } else {
+        setError("No se encontró la dirección");
+      }
+    } catch (error) {
+      console.error("Error fetching address:", error);
+      setError("Error al buscar la dirección");
+    }
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(searchTerm)}&key=${openCageApiKey}`
+      );
+      const result = response.data.results[0];
+      if (result) {
+        const { lat, lng } = result.geometry;
+        setLatitude(lat);
+        setLongitude(lng);
+        setAddress(result.formatted);
+        //map.setView([lat, lng], 15);
+      } else {
+        setError("No se encontró la ubicación");
+      }
+    } catch (error) {
+      console.error("Error fetching location:", error);
+      setError("Error al buscar la ubicación");
+    }
+  };
+
+  function LocationMarker() {
+    useMapEvents({
+      click: handleMapClick,
+    });
+
+    return latitude !== null && longitude !== null ? (
+      <Marker position={[latitude, longitude]} icon={defaultIcon} />
+    ) : null;
+  }
+
+  function CenterMap({ center }: { center: [number, number] | null }) {
+    const map = useMap();
+    useEffect(() => {
+      if (center) {
+        map.setView(center, 15);
+      }
+    }, [center]);
+    return null;
+  }
+
   return (
     <div className="containerCreatePlace">
+      <div className="mapContainer">
+        <input
+          type="text"
+          placeholder="Buscar ubicación"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+        />
+        <button onClick={handleSearch} style={{ marginBottom: "10px" }}>
+          Buscar
+        </button>
+        <MapContainer
+          center={[41.27555556, 1.98694444]} // EETAC de Castelldefels
+          zoom={15}
+          style={{ height: "500px", width: "100%" }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <LocationMarker />
+          <CenterMap center={latitude !== null && longitude !== null ? [latitude, longitude] : null} />
+          {latitude !== null && longitude !== null && (
+            <Marker position={[latitude, longitude]} icon={defaultIcon} />
+          )}
+        </MapContainer>
+      </div>
       <form onSubmit={handleSubmit}>
+        {/* Mostrar Latitud y Longitud */}
+        <p>Latitud: {latitude}</p>
+        <p>Longitud: {longitude}</p>
         {/* Title */}
         <input
           className="inputCreatePlace"
@@ -191,22 +284,6 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           placeholder="Rating"
-        />
-        {/* Latitude */}
-        <input
-          className="inputCreatePlace"
-          type="text"
-          value={latitude}
-          onChange={(e) => setLatitude(e.target.value)}
-          placeholder="Latitude"
-        />
-        {/* Longitude */}
-        <input
-          className="inputCreatePlace"
-          type="text"
-          value={longitude}
-          onChange={(e) => setLongitude(e.target.value)}
-          placeholder="Longitude"
         />
         {/* Photo Upload */}
         <input

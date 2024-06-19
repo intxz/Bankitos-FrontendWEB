@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import axios from "axios";
@@ -36,6 +36,28 @@ function Map({ _id, token }: MapProps) {
     [85.05112878, 180],   // Esquina noreste
   ];
 
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const headers = {
+          "x-access-token": token,
+        };
+        const response = await axios.get(apiUrl + "/place", { headers });
+        setPlaces(response.data);
+        setFilteredPlaces(response.data); // Mostrar todos los lugares al cargar
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching places:", error);
+        setError("Error al obtener lugares");
+        setLoading(false);
+      }
+    };
+
+    fetchPlaces();
+  }, [token]);
+
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
@@ -63,31 +85,16 @@ function Map({ _id, token }: MapProps) {
   };
 
   const searchBankitoPlace = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const headers = {
-        "x-access-token": token,
-      };
-      const response = await axios.get(apiUrl + "/place", { headers });
-      const allPlaces = response.data;
-      const filtered = allPlaces.filter((place: Place) =>
-        place.title.toLowerCase().includes(bankitoSearchTerm.toLowerCase())
-      );
-      setPlaces(allPlaces);
-      setFilteredPlaces(filtered);
-      setLoading(false);
-      if (filtered.length > 0) {
-        const [lng, lat] = filtered[0].coords.coordinates;
-        setGeocodedPlace([lat, lng]);
-      } else {
-        setGeocodedPlace(null);
-        setError("No se encontró ningún lugar en Bankito");
-      }
-    } catch (error) {
-      console.error("Error fetching places:", error);
-      setError("Error al obtener lugares");
-      setLoading(false);
+    const filtered = places.filter((place) =>
+      place.title.toLowerCase().includes(bankitoSearchTerm.toLowerCase())
+    );
+    setFilteredPlaces(filtered);
+    if (filtered.length > 0) {
+      const [lng, lat] = filtered[0].coords.coordinates;
+      setGeocodedPlace([lat, lng]);
+    } else {
+      setGeocodedPlace(null);
+      setError("No se encontró ningún lugar en Bankito");
     }
   };
 
