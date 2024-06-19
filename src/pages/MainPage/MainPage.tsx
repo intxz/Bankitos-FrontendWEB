@@ -59,7 +59,7 @@ function MainPage() {
   };
 
   const GetAllPlacesPage = () => {
-    navigate("view_places_general");
+    navigate("/map");
   };
 
   const CreateNewPlace = () => {
@@ -118,7 +118,7 @@ function MainPage() {
           <nav className="nav-user">
             <ul>
               <li onClick={GetAllUsersPage}>Get All Users</li>
-              <li onClick={GetAllPlacesPage}>Get All Places</li>
+              <li onClick={GetAllPlacesPage}>Map</li>
             </ul>
           </nav>
         )}
