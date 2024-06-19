@@ -4,6 +4,7 @@ import L from "leaflet";
 import axios from "axios";
 import { Place } from "../../../models/place";
 import "leaflet/dist/leaflet.css";
+import { useNavigate } from "react-router-dom";
 
 const apiUrl = "http://localhost:3000";
 const openCageApiKey = process.env.REACT_APP_OPENCAGE_API_KEY;
@@ -14,26 +15,31 @@ interface MapProps {
 }
 
 function Map({ _id, token }: MapProps) {
+  const navigate = useNavigate();
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [bankitoSearchTerm, setBankitoSearchTerm] = useState("");
-  const [geocodedPlace, setGeocodedPlace] = useState<[number, number] | null>(null);
+  const [geocodedPlace, setGeocodedPlace] = useState<[number, number] | null>(
+    null,
+  );
   const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
 
   const defaultIcon = L.icon({
-    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    iconUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
     shadowSize: [41, 41],
   });
 
   const mapBounds: [[number, number], [number, number]] = [
     [-85.05112878, -180], // Esquina suroeste
-    [85.05112878, 180],   // Esquina noreste
+    [85.05112878, 180], // Esquina noreste
   ];
 
   useEffect(() => {
@@ -69,7 +75,7 @@ function Map({ _id, token }: MapProps) {
   const searchPlace = async () => {
     try {
       const response = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(searchTerm)}&key=${openCageApiKey}`
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(searchTerm)}&key=${openCageApiKey}`,
       );
       const result = response.data.results[0];
       if (result) {
@@ -86,7 +92,7 @@ function Map({ _id, token }: MapProps) {
 
   const searchBankitoPlace = async () => {
     const filtered = places.filter((place) =>
-      place.title.toLowerCase().includes(bankitoSearchTerm.toLowerCase())
+      place.title.toLowerCase().includes(bankitoSearchTerm.toLowerCase()),
     );
     setFilteredPlaces(filtered);
     if (filtered.length > 0) {
@@ -96,6 +102,10 @@ function Map({ _id, token }: MapProps) {
       setGeocodedPlace(null);
       setError("No se encontró ningún lugar en Bankito");
     }
+  };
+
+  const handlePlaceClick = (placeId: string) => {
+    navigate(`/place/${placeId}`);
   };
 
   function MapCenter({ place }: { place: [number, number] | null }) {
@@ -156,11 +166,18 @@ function Map({ _id, token }: MapProps) {
         {filteredPlaces.map((place) => (
           <Marker
             key={place._id?.toString()}
-            position={[place.coords.coordinates[1], place.coords.coordinates[0]]}
+            position={[
+              place.coords.coordinates[1],
+              place.coords.coordinates[0],
+            ]}
             icon={defaultIcon}
           >
             <Popup>
-              <strong>{place.title}</strong>
+              <button
+                onClick={() => handlePlaceClick(place._id?.toString() || "")}
+              >
+                <strong>{place.title}</strong>
+              </button>
               <p>Rating: {place.rating}</p>
             </Popup>
           </Marker>

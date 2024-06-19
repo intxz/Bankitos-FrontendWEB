@@ -3,7 +3,13 @@ import axios from "axios";
 import { Place } from "../../../models/place";
 import "./CreatePlace.css";
 import { useNavigate } from "react-router-dom";
-import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -15,11 +21,13 @@ interface FormErrors {
 }
 
 const defaultIcon = L.icon({
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
   shadowSize: [41, 41],
 });
 
@@ -174,7 +182,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
 
     try {
       const response = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${openCageApiKey}`
+        `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${openCageApiKey}`,
       );
       const result = response.data.results[0];
       if (result) {
@@ -191,7 +199,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(searchTerm)}&key=${openCageApiKey}`
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(searchTerm)}&key=${openCageApiKey}`,
       );
       const result = response.data.results[0];
       if (result) {
@@ -252,7 +260,13 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           <LocationMarker />
-          <CenterMap center={latitude !== null && longitude !== null ? [latitude, longitude] : null} />
+          <CenterMap
+            center={
+              latitude !== null && longitude !== null
+                ? [latitude, longitude]
+                : null
+            }
+          />
           {latitude !== null && longitude !== null && (
             <Marker position={[latitude, longitude]} icon={defaultIcon} />
           )}
