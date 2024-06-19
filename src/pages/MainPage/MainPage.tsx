@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa"; // Importar el icono
 import "./MainPage.css";
 import DeleteUser from "../../components/User/deleteUser/Deleteuser";
 import UserProfile from "../../components/User/userProfile/userProfile";
@@ -76,10 +77,16 @@ function MainPage() {
 
   const toggleHeaderExpansion = () => {
     setExpanded(!expanded);
+    if (profileExpanded) {
+      setProfileExpanded(false);
+    }
   };
 
   const toggleProfileExpansion = () => {
     setProfileExpanded(!profileExpanded);
+    if (expanded) {
+      setExpanded(false);
+    }
   };
 
   const logout = async () => {
@@ -87,12 +94,11 @@ function MainPage() {
       const headers = {
         "x-access-token": token,
       };
-      const response = await axios.post(apiUrl + "/logout", {}, { headers });
+      await axios.post(apiUrl + "/logout", {}, { headers });
       localStorage.clear();
       navigate("/");
     } catch (error) {
       console.error("Error logging out:", error);
-      // Handle error if necessary
     }
   };
 
@@ -110,14 +116,15 @@ function MainPage() {
           </div>
           <div className="profile-menu">
             <div className="profile-icon" onClick={toggleProfileExpansion}>
-              Profile
+              <FaUserCircle size={30} />{" "}
+              {/* Utilizar el icono en lugar del texto */}
             </div>
           </div>
         </div>
         {expanded && (
           <nav className="nav-user">
             <ul>
-              <li onClick={GetAllUsersPage}>Get All Users</li>
+              <li onClick={GetAllUsersPage}>Bankiters</li>
               <li onClick={GetAllPlacesPage}>Map</li>
             </ul>
           </nav>

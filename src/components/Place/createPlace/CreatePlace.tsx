@@ -165,7 +165,7 @@ function CreatePlace({ _id, token }: { _id: string; token: string }) {
 
         setError("");
         alert("Place created successfully");
-        navigate("/view_places");
+        navigate("/map");
       } else {
         setError("Please fill in all required fields correctly");
       }
