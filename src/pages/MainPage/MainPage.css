@@ -1,10 +1,14 @@
+/* Global styles */
 body,
 html {
   margin: 0;
   padding: 0;
   overflow: hidden; /* Quitar la barra de desplazamiento */
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
 
+/* Header styles */
 .header-welcomeMainPage {
   background-color: #333;
   color: white;
@@ -13,15 +17,11 @@ html {
   transition: height 0.3s ease;
   z-index: 999;
   position: relative;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .container-headerMainPage {
   display: flex;
-  max-width: 12000px;
-  max-height: 30px;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -39,6 +39,13 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.profile-menu .profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .nav-user,
@@ -81,24 +88,40 @@ html {
   display: block; /* Show when expanded */
 }
 
+/* Main content styles */
+.main-container {
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.logoSVG {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.title-main {
+  font-size: 24px;
+  color: #fc7a00;
+}
+
+.text-main {
+  font-size: 18px;
+  color: #333;
+}
+
 .blur {
   filter: blur(5px);
   pointer-events: none;
 }
 
-.profile,
-.centered-delete {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
+/* Overlay styles */
 .overlay {
   position: fixed;
   top: 0;
@@ -109,33 +132,25 @@ html {
   z-index: 999;
 }
 
-.main-container {
-  height: calc(100vh - 60px);
-  display: flex;
-  justify-content: center;
-  margin-right: 500px;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+/* Centered delete dialog styles */
+.centered-delete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
   padding: 20px;
-  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: none; /* Hide initially */
 }
 
-.logoSVG {
-  max-width: 300px; /* Ajustar el tamaño según sea necesario */
-  height: auto;
-  margin-bottom: 20px; /* Espacio entre la imagen y el texto */
+.centered-delete.active {
+  display: block; /* Show when active */
 }
 
-.content-containerMainPage {
-  margin-left: 300px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Animation for dropdown menus */
 @keyframes slideDown {
   from {
     opacity: 0;

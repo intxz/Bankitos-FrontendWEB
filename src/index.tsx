@@ -10,7 +10,9 @@ import ViewPlacesGeneralPage from "./pages/Places/ViewPlacesGeneralPage";
 import ViewUsersGeneralPage from "./pages/MainPage/ViewUsersGeneralPage";
 import DetailsPlacePage from "./pages/Places/DetailsPlacePage";
 import EditPlacePage from "./pages/Places/EditPlacePage";
+import UserProfilePage from "./pages/Places/UserProfilePage";
 import Map from "./components/Place/Map/Map";
+import UserProfile from "./components/User/userProfile/userProfile";
 import CreateReviewPage from "./pages/Reviews/CreateReviewPage";
 import ViewReviewsPage from "./pages/Reviews/ViewReviewsPage";
 import EditReviewPage from "./pages/Reviews/EditReviewPage";
@@ -44,6 +46,7 @@ function RoutesApp() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/main_page" element={<MainPage />} />
+          <Route path="/profile/:userId" element={<UserProfilePage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/create_place" element={<CreatePlacePage />} />
           <Route path="/view_places" element={<ViewPlacesPage />} />

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import "./MainPage.css";
 import DeleteUser from "../../components/User/deleteUser/Deleteuser";
-import UserProfile from "../../components/User/userProfile/userProfile";
 import logoSVG from "../../utils/Images/logo.svg";
 import axios from "axios";
 import useSocketSetup from "./useSocketSetup";
@@ -20,7 +19,6 @@ function MainPage() {
   const [_id, setId] = useState<string>("");
   const [blurBody, setBlurBody] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
 
   useSocketSetup();
 
@@ -34,14 +32,7 @@ function MainPage() {
   }, []);
 
   const handleShowProfile = () => {
-    setShowProfile(true);
-    setBlurBody(true);
-    setProfileExpanded(false);
-  };
-
-  const handleHideProfile = () => {
-    setShowProfile(false);
-    setBlurBody(false);
+    navigate(`/profile/${_id}`);
   };
 
   const handleDelete = () => {
@@ -156,17 +147,6 @@ function MainPage() {
           <div className="overlay" />
           <div className={`centered-delete ${showDelete ? "active" : ""}`}>
             <DeleteUser _id={_id} token={token} onCancel={handleCancelDelete} />
-          </div>
-        </>
-      )}
-      {showProfile && (
-        <>
-          <div className="overlay" onClick={handleHideProfile} />
-          <div className="profile">
-            <button className="close-button" onClick={handleHideProfile}>
-              Close
-            </button>
-            <UserProfile _id={_id} token={token} />
           </div>
         </>
       )}

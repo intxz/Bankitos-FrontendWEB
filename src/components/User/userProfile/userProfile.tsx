@@ -6,7 +6,6 @@ import { User } from "../../../models/user";
 import "./userProfile.css";
 
 const apiUrl = "http://localhost:3000";
-//const apiUrl='//api.bankitos.duckdns.org';
 
 const filter = new Filter();
 
@@ -147,288 +146,244 @@ function UserProfile({ _id, token }: { _id: string; token: string }) {
   };
 
   return (
-    <div className="main-container">
-      <div className="content">
-        <div className="header">
-          <div className="user-header">
-            <div className="photo-container">
-              <img src={user_data?.photo} alt="Profile" />
-              <div
-                className="edit-icon"
-                onClick={() => setIsEditingPhoto(true)}
-              >
-                ✏️
+    <div className="profile-container">
+      <div className="profile-header">
+        <div className="profile-photo">
+          <img src={user_data?.photo} alt="Profile" />
+          <div className="edit-icon" onClick={() => setIsEditingPhoto(true)}>
+            ✏️
+          </div>
+          {isEditingPhoto && (
+            <form onSubmit={handleSubmit}>
+              <input type="file" onChange={handleFileUpload} />
+              <div>
+                <button type="submit">Save</button>
+                <button type="button" onClick={() => setIsEditingPhoto(false)}>
+                  Cancel
+                </button>
               </div>
-              {isEditingPhoto && (
-                <form onSubmit={handleSubmit}>
-                  <input type="file" onChange={handleFileUpload} />
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingPhoto(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-            <div>
-              <p>
-                {user_data?.first_name}{" "}
-                {user_data?.middle_name && `${user_data.middle_name} `}
-                {user_data?.last_name}
-              </p>
-            </div>
-          </div>
-          <div className="first-container">
-            <p>Name</p>
-            <section className="section-profile">
-              {isEditingFirstName ? (
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    name="first_name"
-                    value={user_update.first_name}
-                    onChange={handleChange}
-                  />
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingFirstName(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.first_name}</p>
-                  <button onClick={() => setIsEditingFirstName(true)}>
-                    Edit
-                  </button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="middle-container">
-            <p>Middle Name</p>
-            <section className="section-profile">
-              {isEditingMiddleName ? (
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    name="middle_name"
-                    value={user_update.middle_name}
-                    onChange={handleChange}
-                  />
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingMiddleName(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.middle_name}</p>
-                  <button onClick={() => setIsEditingMiddleName(true)}>
-                    Edit
-                  </button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="last-container">
-            <p>Last Name</p>
-            <section className="section-profile">
-              {isEditingLastName ? (
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    name="last_name"
-                    value={user_update.last_name}
-                    onChange={handleChange}
-                  />
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingLastName(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.last_name}</p>
-                  <button onClick={() => setIsEditingLastName(true)}>
-                    Edit
-                  </button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="email-container">
-            <p>Email</p>
-            <section className="section-profile">
-              {isEditingEmail ? (
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="email"
-                    name="email"
-                    value={user_update.email}
-                    onChange={handleChange}
-                  />
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingEmail(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.email}</p>
-                  <button onClick={() => setIsEditingEmail(true)}>Edit</button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="personality-container">
-            <p>Personality</p>
-            <section className="section-profile">
-              {isEditingPersonality ? (
-                <form onSubmit={handleSubmit}>
-                  <select
-                    value={user_update.personality}
-                    onChange={handlePersonalityChange}
-                  >
-                    <option value="">Select Personality</option>
-                    <option value="Introverted">Introverted</option>
-                    <option value="Extroverted">Extroverted</option>
-                    <option value="Analytical">Analytical</option>
-                    <option value="Creative">Creative</option>
-                  </select>
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingPersonality(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.personality}</p>
-                  <button onClick={() => setIsEditingPersonality(true)}>
-                    Edit
-                  </button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="description-container">
-            <p>Description</p>
-            <section className="section-profile">
-              {isEditingDescription ? (
-                <form onSubmit={handleSubmit}>
-                  <textarea
-                    name="description"
-                    value={user_update.description}
-                    onChange={handleChange}
-                  />
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingDescription(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.description}</p>
-                  <button onClick={() => setIsEditingDescription(true)}>
-                    Edit
-                  </button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="gender-container">
-            <p>Gender</p>
-            <section className="section-profile">
-              {isEditingGender ? (
-                <form onSubmit={handleSubmit}>
-                  <select
-                    value={user_update.gender}
-                    onChange={handleGenderChange}
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Bankito">Bankito</option>
-                    <option value="Non-binary">Non-binary</option>
-                    <option value="Genderqueer">Genderqueer</option>
-                    <option value="Transgender">Transgender</option>
-                    <option value="Agender">Agender</option>
-                    <option value="Bigender">Bigender</option>
-                    <option value="Genderfluid">Genderfluid</option>
-                    <option value="Two-spirit">Two-spirit</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <div>
-                    <button type="submit">Save</button>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingGender(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <>
-                  <p>{user_data?.gender}</p>
-                  <button onClick={() => setIsEditingGender(true)}>Edit</button>
-                </>
-              )}
-            </section>
-          </div>
-          <div className="birthdate-container">
-            <p>Birth Date</p>
-            <section className="section-profile">
-              <p>{user_data?.birth_date && formatDate(user_data.birth_date)}</p>
-            </section>
-          </div>
-          <div className="phone-container">
-            <p>Phone</p>
-            <section className="section-profile">
-              <p>{user_data?.phone_number}</p>
-            </section>
-          </div>
-          <div className="address-container">
-            <p>Address</p>
-            <section className="section-profile">
-              <p>{user_data?.address}</p>
-            </section>
-          </div>
+            </form>
+          )}
         </div>
+        <h1>
+          {user_data?.first_name}{" "}
+          {user_data?.middle_name && `${user_data.middle_name} `}
+          {user_data?.last_name}
+        </h1>
       </div>
+      <form className="profile-form" onSubmit={handleSubmit}>
+        <div className="profile-field">
+          <label>First Name</label>
+          {isEditingFirstName ? (
+            <>
+              <input
+                type="text"
+                name="first_name"
+                value={user_update.first_name}
+                onChange={handleChange}
+              />
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditingFirstName(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.first_name}</p>
+              <button onClick={() => setIsEditingFirstName(true)}>Edit</button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Middle Name</label>
+          {isEditingMiddleName ? (
+            <>
+              <input
+                type="text"
+                name="middle_name"
+                value={user_update.middle_name}
+                onChange={handleChange}
+              />
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditingMiddleName(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.middle_name}</p>
+              <button onClick={() => setIsEditingMiddleName(true)}>Edit</button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Last Name</label>
+          {isEditingLastName ? (
+            <>
+              <input
+                type="text"
+                name="last_name"
+                value={user_update.last_name}
+                onChange={handleChange}
+              />
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditingLastName(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.last_name}</p>
+              <button onClick={() => setIsEditingLastName(true)}>Edit</button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Email</label>
+          {isEditingEmail ? (
+            <>
+              <input
+                type="email"
+                name="email"
+                value={user_update.email}
+                onChange={handleChange}
+              />
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button type="button" onClick={() => setIsEditingEmail(false)}>
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.email}</p>
+              <button onClick={() => setIsEditingEmail(true)}>Edit</button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Personality</label>
+          {isEditingPersonality ? (
+            <>
+              <select
+                value={user_update.personality}
+                onChange={handlePersonalityChange}
+              >
+                <option value="">Select Personality</option>
+                <option value="Introverted">Introverted</option>
+                <option value="Extroverted">Extroverted</option>
+                <option value="Analytical">Analytical</option>
+                <option value="Creative">Creative</option>
+              </select>
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditingPersonality(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.personality}</p>
+              <button onClick={() => setIsEditingPersonality(true)}>
+                Edit
+              </button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Description</label>
+          {isEditingDescription ? (
+            <>
+              <textarea
+                name="description"
+                value={user_update.description}
+                onChange={handleChange}
+              />
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditingDescription(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.description}</p>
+              <button onClick={() => setIsEditingDescription(true)}>
+                Edit
+              </button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Gender</label>
+          {isEditingGender ? (
+            <>
+              <select value={user_update.gender} onChange={handleGenderChange}>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Bankito">Bankito</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Genderqueer">Genderqueer</option>
+                <option value="Transgender">Transgender</option>
+                <option value="Agender">Agender</option>
+                <option value="Bigender">Bigender</option>
+                <option value="Genderfluid">Genderfluid</option>
+                <option value="Two-spirit">Two-spirit</option>
+                <option value="Other">Other</option>
+              </select>
+              <div className="button-group">
+                <button type="submit">Save</button>
+                <button type="button" onClick={() => setIsEditingGender(false)}>
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>{user_data?.gender}</p>
+              <button onClick={() => setIsEditingGender(true)}>Edit</button>
+            </>
+          )}
+        </div>
+        <div className="profile-field">
+          <label>Birth Date</label>
+          <p>{user_data?.birth_date && formatDate(user_data.birth_date)}</p>
+        </div>
+        <div className="profile-field">
+          <label>Phone</label>
+          <p>{user_data?.phone_number}</p>
+        </div>
+        <div className="profile-field">
+          <label>Address</label>
+          <p>{user_data?.address}</p>
+        </div>
+      </form>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }
