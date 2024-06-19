@@ -20,10 +20,6 @@ export interface User {
   birth_date: string;
   address?: string;
   housing_offered?: string[];
-  emergency_contact?: {
-    full_name?: string;
-    telephone?: string;
-  };
   user_deactivated?: boolean;
   creation_date?: Date;
   modified_date?: Date;
