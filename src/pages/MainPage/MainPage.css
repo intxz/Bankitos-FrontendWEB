@@ -1,3 +1,10 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Quitar la barra de desplazamiento */
+}
+
 .header-welcomeMainPage {
   background-color: #333;
   color: white;
@@ -5,10 +12,16 @@
   border-radius: 10px;
   transition: height 0.3s ease;
   z-index: 999;
+  position: relative;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .container-headerMainPage {
   display: flex;
+  max-width: 12000px;
+  max-height: 30px;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -33,6 +46,14 @@
   background-color: #333;
   border-radius: 10px;
   padding: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.3s ease-in-out;
+  display: none; /* Hide initially */
 }
 
 .nav-user ul,
@@ -47,6 +68,17 @@
   padding: 10px;
   color: white;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-user li:hover,
+.nav-profile li:hover {
+  background-color: #444;
+}
+
+.nav-user.expanded,
+.nav-profile.expanded {
+  display: block; /* Show when expanded */
 }
 
 .blur {
@@ -77,19 +109,40 @@
   z-index: 999;
 }
 
-.content-containerMainPage {
-  text-align: center;
-  padding: 20px;
-}
-
-.container-bodyMainPage {
+.main-container {
+  height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
+  margin-right: 500px;
   align-items: center;
-  height: 30vh;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .logoSVG {
-  max-width: 100%;
+  max-width: 300px; /* Ajustar el tamaño según sea necesario */
   height: auto;
+  margin-bottom: 20px; /* Espacio entre la imagen y el texto */
+}
+
+.content-containerMainPage {
+  margin-left: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

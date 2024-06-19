@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa"; // Importar el icono
+import { FaUserCircle } from "react-icons/fa";
 import "./MainPage.css";
 import DeleteUser from "../../components/User/deleteUser/Deleteuser";
 import UserProfile from "../../components/User/userProfile/userProfile";
@@ -116,36 +116,32 @@ function MainPage() {
           </div>
           <div className="profile-menu">
             <div className="profile-icon" onClick={toggleProfileExpansion}>
-              <FaUserCircle size={30} />{" "}
-              {/* Utilizar el icono en lugar del texto */}
+              <FaUserCircle size={30} />
             </div>
           </div>
         </div>
-        {expanded && (
-          <nav className="nav-user">
-            <ul>
-              <li onClick={GetAllUsersPage}>Bankiters</li>
-              <li onClick={GetAllPlacesPage}>Map</li>
-            </ul>
-          </nav>
-        )}
-        {profileExpanded && (
-          <nav className="nav-profile">
-            <ul>
-              <li onClick={handleShowProfile}>View Profile</li>
-              <li onClick={CreateNewPlace}>Create New Place</li>
-              <li onClick={ViewMyPlaces}>My Places</li>
-              <li className="delete-account" onClick={handleDelete}>
-                Delete Account
-              </li>
-              <li onClick={getHelp}>Get Help</li>
-              <li onClick={logout}>Logout</li>
-            </ul>
-          </nav>
-        )}
+        <nav className={`nav-user ${expanded ? "expanded" : ""}`}>
+          <ul>
+            <li onClick={GetAllUsersPage}>Bankiters</li>
+            <li onClick={GetAllPlacesPage}>Map</li>
+          </ul>
+        </nav>
+        <nav className={`nav-profile ${profileExpanded ? "expanded" : ""}`}>
+          <ul>
+            <li onClick={handleShowProfile}>View Profile</li>
+            <li onClick={CreateNewPlace}>Create New Place</li>
+            <li onClick={ViewMyPlaces}>My Places</li>
+            <li className="delete-account" onClick={handleDelete}>
+              Delete Account
+            </li>
+            <li onClick={getHelp}>Get Help</li>
+            <li onClick={logout}>Logout</li>
+          </ul>
+        </nav>
       </header>
       <div className={`main-container ${blurBody ? "blur" : ""}`}>
         <main className="content-containerMainPage">
+          <img className="logoSVG" src={logoSVG} alt="Bankito" />
           <h1 className="title-main" style={{ color: "#fc7a00" }}>
             Welcome to Bankitos
           </h1>
@@ -174,9 +170,6 @@ function MainPage() {
           </div>
         </>
       )}
-      <div className={`container-bodyMainPage ${blurBody ? "blur" : ""}`}>
-        <img className="logoSVG" src={logoSVG} alt="Bankito" />
-      </div>
     </div>
   );
 }
