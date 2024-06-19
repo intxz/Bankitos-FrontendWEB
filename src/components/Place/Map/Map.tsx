@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import axios from "axios";
@@ -15,60 +15,39 @@ interface MapProps {
 
 function Map({ _id, token }: MapProps) {
   const [places, setPlaces] = useState<Place[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [geocodedPlace, setGeocodedPlace] = useState<[number, number] | null>(
-    null,
-  );
-
-  useEffect(() => {
-    const fetchPlaces = async () => {
-      try {
-        const headers = {
-          "x-access-token": token,
-        };
-        const response = await axios.get(apiUrl + "/place", {
-          headers,
-        });
-        setPlaces(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching places:", error);
-        setError("Error al obtener lugares");
-        setLoading(false);
-      }
-    };
-
-    fetchPlaces();
-  }, [_id, token]);
+  const [bankitoSearchTerm, setBankitoSearchTerm] = useState("");
+  const [geocodedPlace, setGeocodedPlace] = useState<[number, number] | null>(null);
+  const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
 
   const defaultIcon = L.icon({
-    iconUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-    shadowUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
     shadowSize: [41, 41],
   });
 
   const mapBounds: [[number, number], [number, number]] = [
     [-85.05112878, -180], // Esquina suroeste
-    [85.05112878, 180], // Esquina noreste
+    [85.05112878, 180],   // Esquina noreste
   ];
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
+  const handleBankitoSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setBankitoSearchTerm(e.target.value);
+  };
+
   const searchPlace = async () => {
     try {
       const response = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-          searchTerm,
-        )}&key=${openCageApiKey}`,
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(searchTerm)}&key=${openCageApiKey}`
       );
       const result = response.data.results[0];
       if (result) {
@@ -83,14 +62,40 @@ function Map({ _id, token }: MapProps) {
     }
   };
 
+  const searchBankitoPlace = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const headers = {
+        "x-access-token": token,
+      };
+      const response = await axios.get(apiUrl + "/place", { headers });
+      const allPlaces = response.data;
+      const filtered = allPlaces.filter((place: Place) =>
+        place.title.toLowerCase().includes(bankitoSearchTerm.toLowerCase())
+      );
+      setPlaces(allPlaces);
+      setFilteredPlaces(filtered);
+      setLoading(false);
+      if (filtered.length > 0) {
+        const [lng, lat] = filtered[0].coords.coordinates;
+        setGeocodedPlace([lat, lng]);
+      } else {
+        setGeocodedPlace(null);
+        setError("No se encontró ningún lugar en Bankito");
+      }
+    } catch (error) {
+      console.error("Error fetching places:", error);
+      setError("Error al obtener lugares");
+      setLoading(false);
+    }
+  };
+
   function MapCenter({ place }: { place: [number, number] | null }) {
     const map = useMap();
-    useEffect(() => {
-      if (place) {
-        map.setView(place, 15);
-      }
-    }, [place, map]);
-
+    if (place) {
+      map.setView(place, 15);
+    }
     return null;
   }
 
@@ -104,16 +109,32 @@ function Map({ _id, token }: MapProps) {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Buscar un lugar"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
-      />
-      <button onClick={searchPlace} style={{ marginBottom: "10px" }}>
-        Buscar
-      </button>
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          placeholder="Buscar ubicación real"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+        />
+        <button onClick={searchPlace} style={{ marginBottom: "10px" }}>
+          Buscar Ubicación
+        </button>
+      </div>
+
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          placeholder="Buscar lugar en Bankito"
+          value={bankitoSearchTerm}
+          onChange={handleBankitoSearchChange}
+          style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+        />
+        <button onClick={searchBankitoPlace} style={{ marginBottom: "10px" }}>
+          Buscar Lugar en Bankito
+        </button>
+      </div>
+
       <MapContainer
         center={[41.27555556, 1.98694444]} // EETAC de Castelldefels
         zoom={15}
@@ -125,13 +146,10 @@ function Map({ _id, token }: MapProps) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {places.map((place) => (
+        {filteredPlaces.map((place) => (
           <Marker
             key={place._id?.toString()}
-            position={[
-              place.coords.coordinates[1],
-              place.coords.coordinates[0],
-            ]}
+            position={[place.coords.coordinates[1], place.coords.coordinates[0]]}
             icon={defaultIcon}
           >
             <Popup>
