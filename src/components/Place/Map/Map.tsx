@@ -6,6 +6,7 @@ import { Place } from "../../../models/place";
 import "leaflet/dist/leaflet.css";
 
 const apiUrl = "http://localhost:3000";
+const openCageApiKey = process.env.REACT_APP_OPENCAGE_API_KEY;
 
 interface MapProps {
   _id: string;
@@ -17,6 +18,9 @@ function Map({ _id, token }: MapProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [geocodedPlace, setGeocodedPlace] = useState<[number, number] | null>(
+    null,
+  );
 
   useEffect(() => {
     const fetchPlaces = async () => {
@@ -31,7 +35,7 @@ function Map({ _id, token }: MapProps) {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching places:", error);
-        setError("Failed to fetch places");
+        setError("Error al obtener lugares");
         setLoading(false);
       }
     };
@@ -51,26 +55,39 @@ function Map({ _id, token }: MapProps) {
   });
 
   const mapBounds: [[number, number], [number, number]] = [
-    [-85.05112878, -180], // Southwest corner
-    [85.05112878, 180], // Northeast corner
+    [-85.05112878, -180], // Esquina suroeste
+    [85.05112878, 180], // Esquina noreste
   ];
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredPlaces = places.filter((place) =>
-    place.title.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const searchPlace = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+          searchTerm,
+        )}&key=${openCageApiKey}`,
+      );
+      const result = response.data.results[0];
+      if (result) {
+        const { lat, lng } = result.geometry;
+        setGeocodedPlace([lat, lng]);
+      } else {
+        setError("No se encontró la ubicación");
+      }
+    } catch (error) {
+      console.error("Error fetching geocoded place:", error);
+      setError("Error al buscar la ubicación");
+    }
+  };
 
-  const foundPlace = filteredPlaces.length > 0 ? filteredPlaces[0] : null;
-
-  function MapCenter({ place }: { place: Place | null }) {
+  function MapCenter({ place }: { place: [number, number] | null }) {
     const map = useMap();
     useEffect(() => {
       if (place) {
-        const [lng, lat] = place.coords.coordinates;
-        map.setView([lat, lng], 15);
+        map.setView(place, 15);
       }
     }, [place, map]);
 
@@ -78,7 +95,7 @@ function Map({ _id, token }: MapProps) {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
 
   if (error) {
@@ -89,23 +106,26 @@ function Map({ _id, token }: MapProps) {
     <div>
       <input
         type="text"
-        placeholder="Search for a place"
+        placeholder="Buscar un lugar"
         value={searchTerm}
         onChange={handleSearchChange}
         style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
       />
+      <button onClick={searchPlace} style={{ marginBottom: "10px" }}>
+        Buscar
+      </button>
       <MapContainer
         center={[41.27555556, 1.98694444]} // EETAC de Castelldefels
         zoom={15}
         style={{ height: "500px", width: "100%" }}
         maxBounds={mapBounds}
-        maxBoundsViscosity={1.0} // Fully restrict the map to the defined bounds
+        maxBoundsViscosity={1.0} // Restringir completamente el mapa a los límites definidos
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {filteredPlaces.map((place) => (
+        {places.map((place) => (
           <Marker
             key={place._id?.toString()}
             position={[
@@ -120,7 +140,7 @@ function Map({ _id, token }: MapProps) {
             </Popup>
           </Marker>
         ))}
-        <MapCenter place={foundPlace} />
+        <MapCenter place={geocodedPlace} />
       </MapContainer>
     </div>
   );
