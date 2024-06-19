@@ -26,6 +26,8 @@ function SignUp() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [showPasswordNotification, setShowPasswordNotification] =
     useState(true);
+  const [token, setToken] = useState<string>("");
+  const [_id, setId] = useState<string>("");
 
   const [validFields, setValidFields] = useState({
     first_name: true,
@@ -137,11 +139,35 @@ function SignUp() {
         setPhoneNumber("");
         setGender("");
         alert("User created successfully\nPlease login");
+
+        // Hidden login after successful registration
+        await handleLogin(email, password);
       } else {
         setError("Please fill in all required fields correctly");
       }
     } catch (error) {
       setError("Failed to submit the form");
+    }
+  };
+
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      const response = await axios.post(apiUrl + "/login", {
+        email,
+        password,
+      });
+      console.log(response.data);
+      const received_token: string = response.data.token;
+      const received_id: string = response.data._id;
+      localStorage.clear();
+      localStorage.setItem("token", received_token);
+      setToken(received_token);
+      localStorage.setItem("_id", received_id);
+      setId(received_id);
+
+      navigate("/main_page");
+    } catch (error) {
+      setError("Hidden login failed");
     }
   };
 
